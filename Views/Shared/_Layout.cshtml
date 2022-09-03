@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BankApplication</title>
+    <link rel="stylesheet" type="text/css" href="~/lib/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/style.css" />
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1">
+                    <h3 class="nav-logo">Trust</h3>
+                </div>
+                <div class="col-md-3 offset-md-4">
+                    <nav>
+                        <a class="nav-item" asp-controller="Home" asp-action="Index">Home</a>
+                        <a class="nav-item" asp-controller="Cards" asp-action="Index">Cards</a>
+                        <a class="nav-item">Features</a>
+                    </nav>
+                </div>
+                <div class="col-md-2 offset-md-2">
+                    <button class="btn-start"><a asp-controller="Auth" asp-action="Login">Log In</a></button>
+                    <button class="nav-button">Get Free Trial</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    @RenderBody()
+   
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/bootstrap.min.js"></script>
+</body>
+</html>

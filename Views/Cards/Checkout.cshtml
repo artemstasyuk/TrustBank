@@ -1,0 +1,64 @@
+﻿@model Account
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-1 offset-md-1">
+            <img class="ellipse-1" src="/img/ellipse1.png" alt="ellipse">
+        </div>
+
+        <div class="col-md-6 offset-md-1">
+            <div id="container">
+                <h1>&bull; Complete in 5 minutes&bull;</h1>
+                <div class="underline">
+                </div>
+                <div class="icon_wrapper text-center">
+                    <img src="/img/icon-courier.png">
+                </div>
+                <form asp-action="Checkout" method="post" id="contact_form">
+                    <div class="name">
+                        <label for="name"></label>
+                        @*<input type="text" placeholder="My name is" asp-for="@Model.UserName" id="name_input" required>*@
+                    </div>
+                    <div class="email">
+                        <label for="email"></label>
+                        <input type="email" placeholder="My e-mail is" name="email" id="email_input" required>
+                    </div>
+                    <div class="telephone">
+                        <label for="name"></label>
+                        <input type="text" placeholder="My number is" name="telephone" id="telephone_input" required>
+                    </div>
+                    <div class="subject">
+                        <label for="subject"></label>
+                        <select placeholder="My currency is" name="subject" id="subject_input" required>
+                            <option disabled hidden selected>SELECT YOUR CURRENCY</option>
+                            <option>DOLLAR</option>
+                            <option>EURO</option>
+                            <option>RUBLE</option>
+                        </select>
+                    </div>
+                    <div class="birth mt-2">
+                        <label for="name">MY BIRTHDAY IS ON</label>
+                        <input type="date" name="name" id="name_input" required>
+                    </div>
+                    @*<div class="citizenship">
+                        <label asp-for="@Model.Citizenship"></label>
+                        <input type="text" placeholder="I have citizenship" asp-for="@Model.Citizenship" id="email_input" required>
+                    </div>*@
+                    <div class="message">
+                        <label for="message"></label>
+                        <textarea name="message" placeholder="I'd like to chat about" id="message_input" cols="30" rows="5" required></textarea>
+                    </div>
+                    <div class="submit">
+                        <input type="submit" value="Send Message" id="form_button" />
+                    </div>
+                </form><!-- // End form -->
+            </div><!-- // End #container -->
+        </div>
+
+        <div class="col-md-1 offset-md-1">
+            <img class="ellipse-2" src="/img/ellipse2.png" alt="ellipse">
+        </div>
+    </div>
+</div>
+
+    

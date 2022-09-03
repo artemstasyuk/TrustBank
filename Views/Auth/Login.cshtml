@@ -1,0 +1,31 @@
+﻿@model LoginViewModel
+<div class="container">
+    <div class="row">
+        <div class="">
+
+            <h2 class="main-title">Login to service</h2>
+
+            <a asp-controller="Auth" asp-action="Registration">Registration</a><dl></dl>
+
+            <div class="form_group">
+                <label class="main-text" asp-for="PhoneNumber">Phone Number</label>
+                <input class="form_input" asp-for="PhoneNumber"/>
+                <span asp-validation-for="PhoneNumber"/>
+            </div>
+
+            <div class="form_group">
+                <label class="main-text" asp-for="Email">Email</label>
+                <input class="form_input" placeholder=" " type="text" asp-for="Email"/>
+                <span asp-validation-for="Email"/>
+            </div>
+
+            <div class="form_group">
+                <label class="main-text" asp-for="Password">Password</label>
+                <input class="form_input" asp-for="Password"/>
+                <span asp-validation-for="Password"/>
+            </div>
+
+            <button class="main-btn btn-start"> Enter</button>
+        </div>
+    </div>
+</div>
