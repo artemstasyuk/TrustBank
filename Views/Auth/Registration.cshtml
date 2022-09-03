@@ -1,14 +1,7 @@
 ﻿@model RegistrationViewModel
 <main>
     <div class="container">
-        <div class="row">
-            <!--Validation style-->
-              <style>
-                    .input-validation-error {
-                        border-color: red;
-                        background-color: #fff;
-                    }
-                </style>
+        <div class="row">            
               <form class="form"asp-action="Registration" asp-controller="Auth" asp-anti-forgery="true">
                   <div class="validation" asp-validation-summary="ModelOnly"></div>
                   <div>

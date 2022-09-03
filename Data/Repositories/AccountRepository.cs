@@ -33,7 +33,6 @@ public class AccountRepository : IAccountRepository
         await SaveAsync();
     }
 
-
     public async Task CreateAccount(Account account)
     {
         account.AccountStatus = AccountStatus.Active;
@@ -41,6 +40,7 @@ public class AccountRepository : IAccountRepository
         await _dbContext.Accounts.AddAsync(account);
         await SaveAsync();
     }
+    
     public async Task ReturnAccountAsync(int accountId)
     {
         var account = await _dbContext.Accounts.FindAsync(new object[] {accountId});

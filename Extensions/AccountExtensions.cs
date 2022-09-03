@@ -4,6 +4,7 @@ public static class AccountExtensions
 {
     public static List<Account> ToAccount(this IEnumerable<RegistrationViewModel> items) =>
         items.Select(x => x.ToAccount()).ToList();
+    
     public static Account ToAccount(this RegistrationViewModel item) => new()
     {
         PhoneNumber = item.PhoneNumber,
