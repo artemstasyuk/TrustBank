@@ -6,7 +6,7 @@ public interface ICardRepository
     Task DeleteCardAsync(int cardId);
     Task ReturnCardAsync(int cardId);
     Task UpdateCardInitialsAsync(Card card);
-    Task<List<Card>> GetAllCardsByAccIdAsync(string accId);
+    Task<List<Card>> GetAllCardsByProfileIdAsync(string profileId);
     Task<List<Card>> GetAllCardsByPhoneNumberAsync(string phoneNumber);
     Task<Card> GetCardByIdAsync(int id);
     Task<Card> GetCardByCardNumberAsync(string cardNumber);

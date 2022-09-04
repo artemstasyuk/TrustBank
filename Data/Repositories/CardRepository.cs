@@ -50,12 +50,12 @@ public class CardRepository : ICardRepository
     }
     
 
-    public async Task<List<Card>> GetAllCardsByAccIdAsync(string accId) =>
-        await _appDbContext.Cards.Where(card => card.AccountId.Equals(accId)).ToListAsync();
+    public async Task<List<Card>> GetAllCardsByProfileIdAsync(string profileId) =>
+        await _appDbContext.Cards.Where(card => card.ProfileId.Equals(profileId)).ToListAsync();
     
     
     public async Task<List<Card>> GetAllCardsByPhoneNumberAsync(string phoneNumber) =>
-        await _appDbContext.Cards.Where(card => card.AccountId.Equals(phoneNumber)).ToListAsync();
+        await _appDbContext.Cards.Where(card => card.ProfileId.Equals(phoneNumber)).ToListAsync();
     
     
     public async Task<Card> GetCardByIdAsync(int id) =>

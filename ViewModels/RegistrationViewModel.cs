@@ -7,12 +7,7 @@ namespace BankApplication.Dto;
 
 public class RegistrationViewModel
 {
-    [Display(Name = "Phone Number")]
-    [DataType(DataType.PhoneNumber)]
-    [StringLength(13)]   
-    [Required(ErrorMessage = "Name must match the format")]
-    public string PhoneNumber { get; set; }
-    
+
     [Display(Name = "Password")]
     [StringLength(6)]
     [DataType(DataType.Password)]

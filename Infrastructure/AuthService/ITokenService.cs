@@ -2,5 +2,5 @@
 
 public interface ITokenService
 {
-    string CreateToken(Account account);
+    string CreateToken(User user);
 }
