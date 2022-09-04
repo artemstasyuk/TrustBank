@@ -39,6 +39,7 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 builder.Services.AddTransient<ICardRepository, CardRepository>();
 builder.Services.AddTransient<IAccountRepository, AccountRepository>();
+builder.Services.AddTransient<ICardSampleRepository, CardSampleRepository>();
 builder.Services.AddTransient<ITransferOperation, TransferOperation>();
 builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddTransient<ISmsService, SmsService>();
@@ -87,5 +88,9 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "cardsFilter",
+    pattern: "{controller=Cards}/{action=Index}/{type?}");
 
 app.Run();
