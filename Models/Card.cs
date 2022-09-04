@@ -22,8 +22,8 @@ public class Card
     [StringLength(13)]      
     public string PhoneNumber { get; set; }
     
-    [ForeignKey("Account")]
-    public int AccountId { get; set; }
+    [ForeignKey("Profile")]
+    public int ProfileId { get; set; }
     
     [Display(Name = "CardNumber")]
     [StringLength(16)]
@@ -51,5 +51,5 @@ public class Card
     public CardStatus CardStatus { get; set; }
        
     //not into db
-    public Account Account { get; set; }
+    public Profile Profile { get; set; }
 }

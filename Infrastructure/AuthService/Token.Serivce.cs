@@ -15,16 +15,15 @@ public class TokenService : ITokenService
         _issuer = config["Jwt:Issuer"];
     }
 
-    public string CreateToken(Account account)
+    public string CreateToken(User user)
     {
         var cred = new SigningCredentials(_key, SecurityAlgorithms.HmacSha256);
         var claims = new List<Claim>
         {
-            new ("UserId", account.Id.ToString()),
-            new (ClaimTypes.Name, account.AccountName),
-            new (ClaimTypes.Surname, account.AccountSurname),
-            new (ClaimTypes.MobilePhone, account.PhoneNumber),
-            new (ClaimTypes.Email, account.Email),
+            new ("UserId", user.Id.ToString() ),
+            new (ClaimTypes.Name, user.Name),
+            new (ClaimTypes.Surname, user.Surname),
+            new (ClaimTypes.Email, user.Email),
             
         };
         var token = new JwtSecurityToken(_issuer,
