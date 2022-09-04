@@ -1,10 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
+
 body {
     background-color: #24262D;
     margin-top: 20px;
-    color: white;
+    color: white;    
 }
 
 /*---Navigation---*/
@@ -119,18 +120,17 @@ main {
     
 }
 
-.card-nav-items {
-    border: solid 1px gray;
-    border-radius: 3px;
+.card-nav-items {   
+    border-radius: 3px;    
 }
 
 .card-nav-item {
     text-decoration: none;
     color: white;
     text-align: center;
-    padding: 10px 26px;   
+    padding: 10px 26px;
     font-size: 17px;
-    border-right: solid 1px gray;
+    border-right: solid 1px gray ;        
 }
      
 .card-nav-item:hover {
@@ -401,3 +401,53 @@ label{
     font-family: 'Montserrat', Arial, sans-serif;
     margin-bottom: 18px;
 }
+
+
+/* Модальный (фон) */
+.modal {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed; /* Оставаться на месте */
+    z-index: 1; /* Сидеть на вершине */
+    left: 0;
+    top: 0;
+    width: 100%; /* Полная ширина */
+    height: 100%; /* Полная высота */
+    overflow: auto; /* Включите прокрутку, если это необходимо */
+    background-color: rgb(0,0,0); /* Цвет запасной вариант */
+    background-color: rgba(0,0,0,0.4); /* Черный с непрозрачностью */
+}
+
+/* Модальное содержание/коробка */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% сверху и по центру */
+    padding: 20px;
+    padding-top: 0;
+    border: 1px solid #888;
+    width: 30%; /* Может быть больше или меньше, в зависимости от размера экрана */
+    color: black;   
+}
+
+.modal-info {
+    color: #54595E;
+}
+
+.modal-info-actions {
+    font-family: 'Montserrat', Arial, sans-serif;
+    color: #808080;
+} 
+
+/* Кнопка закрытия */
+.close {
+    color: brown;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: end;
+}    
+
+    .close:hover,
+    .close:focus {
+        color: red;
+        text-decoration: none;
+        cursor: pointer;
+    }

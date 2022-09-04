@@ -43,8 +43,30 @@
                     <img width=330 src="/img/bank-card.png" />
                 </div>
             </div>
+            <!-- Modal -->
+            <div id="myModal" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content">                    
+                    <div class="row">
+                        <div class="col-1 offset-11">
+                            <button class="btn btn-close btn-danger close"></button>
+                        </div>                                           
+                    </div>
+                    <div class="row">
+                        <div class="col-10 offset-1">
+                            <img class="modal-image-pattern" src="/img/card-template.png" width="120"/>
+                            <h6 class="modal-info"><i>1.</i> Free maintenance</h6>
+                            <h6 class="modal-info"><i>2.</i> Free deposits and transfers</h6>
+                            <h6 class="modal-info"><i>3.</i> Withdrawal without commission</h6>
+                            <p class="modal-info-actions mt-4">Top up | Transfer | Store | Withdraw | Pay</p>
+                        </div>                                           
+                    </div>   
+                </div>
+
+            </div>
             <a class="btn btn-light me-1" asp-action="Checkout">Checkout</a>
-            <a class="btn btn-primary">More</a>
+            <button class="btn btn-primary" id="myBtn">More</button>
         </div>
     </div>
 

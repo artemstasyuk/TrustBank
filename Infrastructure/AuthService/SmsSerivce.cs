@@ -6,7 +6,7 @@ namespace BankApplication.Infrastructure.AuthService;
 
 public class SmsService : ISmsService
 {
-    public async Task<string> SendSmsCodeAsync(string number)
+    public string SendSmsCodeAsync(string number)
     {
         var code = GenerateSmsCode();
         
