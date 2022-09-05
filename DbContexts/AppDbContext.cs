@@ -8,7 +8,7 @@ public class AppDbContext : DbContext
     public DbSet<Card> Cards { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Transfer> Transfers { get; set; }
-    public DbSet<Account> Accounts { get; set; }
+    public DbSet<Profile> UsersProfiles { get; set; }
     public DbSet<CardSample> CardSamples { get; set; }
     public DbSet<Feature> Features { get; set; }
 

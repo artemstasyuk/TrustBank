@@ -1,0 +1,44 @@
+﻿<div class="contact-page mt-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <img src="/img/metall-texture.jpg" />
+            </div>
+            <div class="col-md-4 offset-md-1">
+                <h1 class="contact-title">Contact Us</h1>
+                <form asp-action="ContactUs" method="post" id="contact_form">
+                    <div class="telephone">
+                        <label for="name"></label>
+                        <input type="text" placeholder="My name is" id="name_input" required>
+                    </div>
+                    <div class="telephone">
+                        <label for="name"></label>
+                        <input type="email" placeholder="My email is" name="email" id="email_input" required>
+                    </div>
+                    <div class="message">
+                        <label for="message"></label>
+                        <textarea name="message" placeholder="I'd like to chat about" id="message_input" cols="30" rows="5" required></textarea>
+                    </div>
+                    <div class="submit">
+                        <input type="submit" value="Contact" id="form_button" />
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-3 offset-md-1">
+                <div class="contacts">
+                    <h5 style="color: #FDCF49;">Contact</h5>
+                    <p><i>trustbank@gmail.com</i></p>
+
+                    <h5 style="color: #FDCF49;" class="mt-5">Based in</h5>
+                    <p><i>Tokio, Japan</i></p>
+                    <div class="icons">
+                        <a href="https://web.telegram.org/k/"><img src="/img/telegram.png" /></a>
+                        <a href="https://twitter.com/?lang=ru"><img src="/img/twitter.png" /></a>
+                        <a href="https://www.instagram.com/"><img src="/img/instagram.png" /></a>
+                        <small>*запрещен в РФ</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

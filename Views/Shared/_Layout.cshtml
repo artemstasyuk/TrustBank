@@ -26,7 +26,7 @@
                     <nav>
                         <a class="nav-item" asp-controller="Home" asp-action="Index">Home</a>
                         <a class="nav-item" asp-controller="Cards" asp-action="Index">Cards</a>
-                        <a class="nav-item">Features</a>
+                        <a class="nav-item" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
                     </nav>
                 </div>
                 <div class="col-md-2 offset-md-2">
@@ -35,7 +35,10 @@
                     {
                         <button class="nav-button"><a asp-controller="Auth" asp-action="Login">Log In</a></button>
                     }
-                    <button> Account Name </button>
+                    else
+                    {
+                        <button> Account Name </button>
+                    }                    
                 </div>
             </div>
         </div>

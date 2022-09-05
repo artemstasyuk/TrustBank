@@ -8,6 +8,11 @@ body {
     color: white;    
 }
 
+a{
+    text-decoration: none;   
+    color: white;
+}
+
 /*---Navigation---*/
 .nav-logo {
     color: white;
@@ -407,29 +412,27 @@ label{
     margin-bottom: 18px;
 }
 
-
-/* ��������� (���) */
+/*MODAL WINDOW*/
 .modal {
-    display: none; /* ������ �� ��������� */
-    position: fixed; /* ���������� �� ����� */
-    z-index: 1; /* ������ �� ������� */
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
     left: 0;
     top: 0;
-    width: 100%; /* ������ ������ */
-    height: 100%; /* ������ ������ */
-    overflow: auto; /* �������� ���������, ���� ��� ���������� */
-    background-color: rgb(0,0,0); /* ���� �������� ������� */
-    background-color: rgba(0,0,0,0.4); /* ������ � ��������������� */
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4);
 }
 
-/* ��������� ����������/������� */
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* 15% ������ � �� ������ */
+    margin: 15% auto; 
     padding: 20px;
     padding-top: 0;
     border: 1px solid #888;
-    width: 30%; /* ����� ���� ������ ��� ������, � ����������� �� ������� ������ */
+    width: 30%;
     color: black;   
 }
 
@@ -442,7 +445,6 @@ label{
     color: #808080;
 } 
 
-/* ������ �������� */
 .close {
     color: brown;
     font-size: 20px;
@@ -456,3 +458,24 @@ label{
         text-decoration: none;
         cursor: pointer;
     }
+
+
+
+/*CONTACT US*/
+.contact-page {
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+.contact-title{
+    margin-right: 40px;
+}
+
+.icons{
+    margin-top: 230px;
+}
+.icons img{
+    margin-right: 10px;
+}
+
+.contacts{
+    margin-top: 145px;
+}
