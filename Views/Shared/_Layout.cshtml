@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -37,8 +38,12 @@
                     }
                     else
                     {
-                        <button> Account Name </button>
-                    }                    
+                        var jwtName = Context.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name);
+                        var jwtSurname = Context.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Surname);
+                        var login = $"{jwtName.Value} {jwtSurname.Value}";
+                        
+                        <button class="nav-button">login</button>
+                    }
                 </div>
             </div>
         </div>
