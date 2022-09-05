@@ -38,7 +38,8 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 
 builder.Services.AddTransient<ICardRepository, CardRepository>();
-builder.Services.AddTransient<IAccountRepository, AccountRepository>();
+builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<IProfileRepository, ProfileRepository>();
 builder.Services.AddTransient<ICardSampleRepository, CardSampleRepository>();
 builder.Services.AddTransient<ITransferOperation, TransferOperation>();
 builder.Services.AddTransient<IEmailService, EmailService>();
