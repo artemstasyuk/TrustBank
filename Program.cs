@@ -58,8 +58,9 @@ if (app.Environment.IsDevelopment())
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.EnsureDeleted();
     db.Database.EnsureCreated();
-}   
+}
 
+app.UseBrowserLink();   
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

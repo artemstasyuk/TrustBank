@@ -7,6 +7,10 @@ body {
     margin-top: 20px;
     color: white;    
 }
+a { 
+    color: white;
+    text-decoration: none;
+}
 
 /*---Navigation---*/
 .nav-logo {
@@ -59,8 +63,8 @@ main {
 
 .user{
     position: relative;
-    width:25px;
-    height: 25px;
+    width:40px;
+    height: 40px;
 }
 .ellipses {
     position: absolute;

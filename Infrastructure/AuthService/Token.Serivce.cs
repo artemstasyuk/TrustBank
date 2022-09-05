@@ -20,7 +20,7 @@ public class TokenService : ITokenService
         var cred = new SigningCredentials(_key, SecurityAlgorithms.HmacSha256);
         var claims = new List<Claim>
         {
-            new ("UserId", user.Id.ToString() ),
+            new (ClaimTypes.NameIdentifier, user.Id.ToString() ),
             new (ClaimTypes.Name, user.Name),
             new (ClaimTypes.Surname, user.Surname),
             new (ClaimTypes.Email, user.Email),

@@ -8,6 +8,7 @@ public class UserRepository : IUserRepository
         _dbContext = dbContext;
     }
 
+    public async Task<User> GetUserByIdAsync(int id) => await _dbContext.Users.FindAsync(new object[] {id});
     public async Task<User> GetUserByEmailAsync(string email) => 
         await _dbContext.Users.Where(p => p.Email == email).FirstOrDefaultAsync();
     public async Task CreateUser(User user)

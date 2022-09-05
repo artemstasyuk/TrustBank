@@ -42,7 +42,7 @@
                         var jwtSurname = Context.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Surname);
                         var login = $"{jwtName.Value} {jwtSurname.Value}";
                         
-                        <button class="nav-button">login</button>
+                        <button class="nav-button">@login</button>
                     }
                 </div>
             </div>
