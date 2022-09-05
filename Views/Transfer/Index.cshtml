@@ -1,0 +1,24 @@
+﻿@model Card
+<div class="container">
+    <div class="cards-title text-center mt-5">
+        <h1 class="cards-header">Card</h1>
+    </div>
+    <div class="card-list mt-5">
+        <div class="card-item">
+            <div class="row mt-5">
+                <div class="col-6">
+                    <div class="row mt-4">
+                        <div class="col-3">
+                            <b class="card-item-text">Ballance</b>
+                            <p>@Model.Balance</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a asp-action="Transfer" asp-route-id = "@Model.Id"> Transfer </a>
+        <button> Replenish </button>
+        <button> Pay </button>
+    </div>
+</div>
+      

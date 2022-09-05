@@ -31,29 +31,32 @@
         {
             foreach (var item in Model.Cards)
             {
-                <a asp-controller="Auth" asp-action="Login"> 
-                    <div class="card-item">
-                        <a class="card-item-type"><img width="25" class="me-2" src="/img/shopping-cart.png"/><b>Debit</b></a>
-                        <div class="row mt-5">
-                            <div class="col-6">
-                                <div class="row mt-4">
-                                    <div class="col-3">
-                                        <b class="card-item-text">@item.CardName</b>
-                                    </div>
-                                    <div class="col-3 offset-1">
-                                        <b class="card-item-text">@item.CardSurname</b>
-                                    </div>
-                                    <div class="col-3 offset-1">
-                                        <b class="card-item-text">@item.CardNumber</b>
-                                    </div>
+                <div class="card-item">
+                    <a class="card-item-type"><img width="25" class="me-2" src="/img/shopping-cart.png"/><b>Debik</b></a>
+                    <div class="row mt-5">
+                        <div class="col-6">
+                            <div class="row mt-4">
+                                <div class="col-3">
+                                    <b class="card-item-text">@item.CardName</b>
                                 </div>
-                            </div>
-                            <div class="col-3 offset-2">
-                                <img width=330 src="/img/bank-card.png"/>
+                                <div class="col-3 offset-1">
+                                    <b class="card-item-text">@item.CardSurname</b>
+                                </div>
+                                <div class="col-3 offset-1">
+                                    <b class="card-item-text">@item.CardNumber</b>
+                                </div>
+                                <div class="col-3 offset-1">
+                                    <b class="card-item-text">@item.CVV</b>
+                                </div>
+
                             </div>
                         </div>
+                        <div class="col-3 offset-2">
+                            <img width=330 src="/img/bank-card.png"/>
+                        </div>
                     </div>
-                 </a>
+                </div>
+                <a asp-controller="Transfer" asp-action="Index" asp-route-id = "@item.Id"> Check </a>
             }
         }
         else

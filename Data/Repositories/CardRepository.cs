@@ -63,7 +63,7 @@ public class CardRepository : ICardRepository
         await _appDbContext.Cards.FindAsync(new object[] {id});
     
     public async Task<Card> GetCardByCardNumberAsync(string cardNumber) =>
-        await _appDbContext.Cards.FindAsync(new object[] {cardNumber});
+        await _appDbContext.Cards.Where(card => card.CardNumber == cardNumber).FirstOrDefaultAsync();
     
     public async Task SaveAsync() => 
         await _appDbContext.SaveChangesAsync();

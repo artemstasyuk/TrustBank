@@ -1,0 +1,26 @@
+﻿@model Operation
+
+<div class="container">
+<div class="cards-title text-center mt-5">
+    <h1 class="cards-header">Card</h1>
+</div>
+<div class="card-list mt-5">
+    <div class="card-item">
+        <div class="row mt-5">
+            <div class="col-6">
+                <div class="row mt-4">
+                    <div class="col-3">
+                        <b class="card-item-text">Operation number</b>
+                        <p>@Model.Id</p>
+                    </div>
+                    <div class="col-3">
+                        <b class="card-item-text">Amount</b>
+                        <p>@Model.Amount</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a asp-action="Index" asp-controller="Profile"> Back </a>
+</div>
+</div>

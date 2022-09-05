@@ -1,5 +1,7 @@
 using System.Text;
 using BankApplication.Infrastructure.AuthService;
+using BankApplication.Infrastructure.TransferService;
+using BBankApplication.Infrastructure.TransferService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.IdentityModel.Tokens;
@@ -41,7 +43,7 @@ builder.Services.AddTransient<ICardRepository, CardRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IProfileRepository, ProfileRepository>();
 builder.Services.AddTransient<ICardSampleRepository, CardSampleRepository>();
-builder.Services.AddTransient<ITransferOperation, TransferOperation>();
+builder.Services.AddTransient<ITransferService, TransferService>();
 builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddTransient<ISmsService, SmsService>();
 builder.Services.AddTransient<ITokenService, TokenService>();
@@ -56,7 +58,6 @@ if (app.Environment.IsDevelopment())
 {
     using var scope = app.Services.CreateScope();
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    db.Database.EnsureDeleted();
     db.Database.EnsureCreated();
 }
 
