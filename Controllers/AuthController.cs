@@ -35,7 +35,7 @@ public class AuthController : Controller
         var user = await _userRepository.GetUserByEmailAsync(viewModel.Email);
         if (user is null) return BadRequest(new {messege = "Not exist"});
         
-        if (_userRepository.CheckPassword(viewModel.Password, user)) return BadRequest(new {messege = "Password isn't correct"});
+        if (!_userRepository.CheckPassword(viewModel.Password, user)) return BadRequest(new {messege = "Password isn't correct"});
 
         Authorize(_tokenService.CreateToken(user));
 
@@ -64,7 +64,7 @@ public class AuthController : Controller
 
         await _profileRepository.CreateProfile(user);
 
-        var emailTokenDto = _emailService.SendEmailCode(viewModel.Email); 
+        var emailTokenDto = _emailService.SendEmailCode(viewModel.Email, GenerateEmailCode(), "Verify your email"); 
         _emailToken.SetEmailToken(emailTokenDto);
         
         return RedirectToAction("VerifyEmailToken");
@@ -95,6 +95,8 @@ public class AuthController : Controller
         return RedirectToAction("Index", "Home");
     }
 
+    #region Helpers
+    
     public void Authorize(string token)
     {
         Response.Cookies.Append("jwt", token, new CookieOptions()
@@ -102,4 +104,12 @@ public class AuthController : Controller
             HttpOnly = true
         });
     }
+    public string GenerateEmailCode()
+    {
+        int _min = 000000;
+        int _max = 999999;
+        Random _rdm = new Random();
+        return _rdm.Next(_min, _max).ToString();
+    }
+    #endregion
 }

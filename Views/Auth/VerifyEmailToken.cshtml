@@ -7,14 +7,14 @@
         <div class="col-md-6 offset-md-1">
             <div id="container">
                 <br/>
-                <h1>&bull; Login &bull;</h1>
+                <h1>&bull; Verify Your Email &bull;</h1>
                 <br/>
                 <div class="underline">
                 </div>
-                <form class="form" asp-action="Login" asp-anti-forgery="true">
+                <form class="form" asp-action="VerifyEmailToken" asp-anti-forgery="true">
                    
                     <div class="form-group">
-                        <label class="login_label" asp-for="EmailCode">Введите код из почты</label><br/>
+                        <label class="login_label" asp-for="EmailCode">Enter the code</label><br/>
                         <input class="form_input" asp-for="EmailCode"/>
                         <span class="input-validation-error" asp-validation-for="EmailCode"/>
                     </div>      

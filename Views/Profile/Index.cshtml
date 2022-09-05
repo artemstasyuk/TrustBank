@@ -1,0 +1,65 @@
+﻿@model Profile
+<div class="container">
+    
+    <div class="cards-title text-center mt-5">
+        <h1 class="cards-header">Profile</h1>
+    </div>
+    <div class="card-list mt-5">
+        <div class="card-item">
+            <div class="row mt-5">
+                <div class="col-6">
+                    <div class="row mt-4">
+                        <div class="col-3">
+                            <b class="card-item-text">Email</b>
+                            <p>@Model.Email</p>
+                        </div>
+                        <div class="col-3 offset-1">
+                            <b class="card-item-text">Name</b>
+                            <p>@Model.Name</p>
+                        </div>
+                        <div class="col-3 offset-1">
+                            <b class="card-item-text">Surname</b>
+                            <p>@Model.Surname</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-list mt-5">
+        @if (Model.Cards.Count != 0)
+        {
+            foreach (var item in Model.Cards)
+            {
+                <a asp-controller="Auth" asp-action="Login"> 
+                    <div class="card-item">
+                        <a class="card-item-type"><img width="25" class="me-2" src="/img/shopping-cart.png"/><b>Debit</b></a>
+                        <div class="row mt-5">
+                            <div class="col-6">
+                                <div class="row mt-4">
+                                    <div class="col-3">
+                                        <b class="card-item-text">@item.CardName</b>
+                                    </div>
+                                    <div class="col-3 offset-1">
+                                        <b class="card-item-text">@item.CardSurname</b>
+                                    </div>
+                                    <div class="col-3 offset-1">
+                                        <b class="card-item-text">@item.CardNumber</b>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3 offset-2">
+                                <img width=330 src="/img/bank-card.png"/>
+                            </div>
+                        </div>
+                    </div>
+                 </a>
+            }
+        }
+        else
+        {
+            <a asp-controller="Cards" asp-action="Checkout"> You haven't got a card yet ?</a>
+        }
+    </div>
+</div>
+                

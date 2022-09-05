@@ -11,11 +11,12 @@ public class CardRepository : ICardRepository
         _appDbContext = dbContext;
     }
     
-    public async Task CreateCardAsync(Card card)
+    public async Task CreateCardAsync(Card card, int profileId)
     {
         card.CardStatus = CardStatus.Active;
         card.CardNumber = GenerateCardNumber();
         card.CVV = GenerateCvvCode();
+        card.ProfileId = profileId;
         await _appDbContext.Cards.AddAsync(card);
         await SaveAsync();
     }
@@ -50,12 +51,12 @@ public class CardRepository : ICardRepository
     }
     
 
-    public async Task<List<Card>> GetAllCardsByProfileIdAsync(string profileId) =>
+    public async Task<List<Card>> GetAllCardsByProfileIdAsync(int profileId) =>
         await _appDbContext.Cards.Where(card => card.ProfileId.Equals(profileId)).ToListAsync();
     
     
     public async Task<List<Card>> GetAllCardsByPhoneNumberAsync(string phoneNumber) =>
-        await _appDbContext.Cards.Where(card => card.ProfileId.Equals(phoneNumber)).ToListAsync();
+        await _appDbContext.Cards.Where(card => card.ProfileId.Equals(phoneNumber)).Include(x => x.Profile).ToListAsync();
     
     
     public async Task<Card> GetCardByIdAsync(int id) =>

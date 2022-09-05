@@ -11,7 +11,7 @@ public class EmailService : IEmailService
         _configuration = configuration;
     }
     
-    public EmailTokenDto SendEmailCode(string emailTo)
+    public EmailTokenDto SendEmailCode(string emailTo, string body, string subject)
     {
 
         MailMessage message = new MailMessage();
@@ -23,9 +23,9 @@ public class EmailService : IEmailService
             
             message.To.Add(new MailAddress(emailTo)); // to
             
-            message.Subject = "EmailVerification"; // message title
+            message.Subject = subject; // message title
             
-            message.Body =  GenerateEmailCode(); // message body
+            message.Body =  body; // message body
 
             using (SmtpClient client = new SmtpClient("smtp.gmail.com", 587)) // using Google server
             {
@@ -37,12 +37,5 @@ public class EmailService : IEmailService
             }
 
             return new EmailTokenDto() {Email = emailTo, EmailCode = message.Body};
-    }
-    private string GenerateEmailCode()
-    {
-        int _min = 000000;
-        int _max = 999999;
-        Random _rdm = new Random();
-        return _rdm.Next(_min, _max).ToString();
     }
 }
