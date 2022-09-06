@@ -1,14 +1,16 @@
 ﻿using BankApplication.Infrastructure.TransferService;
 using BankApplication.Views.Transfer;
 
-namespace BBankApplication.Infrastructure.TransferService;
+namespace BankApplication.Infrastructure.TransferService;
 
 public class TransferService : ITransferService
 {
     private readonly ICardRepository _cardRepository;
+    private readonly IOperationRepository _operationRepository;
 
-    public TransferService(ICardRepository cardRepository)
+    public TransferService(ICardRepository cardRepository, IOperationRepository operationRepository)
     {
+        _operationRepository = operationRepository;
         _cardRepository = cardRepository;
     }
     
@@ -23,6 +25,15 @@ public class TransferService : ITransferService
         cardFromDb.Balance -= amount;
         cardToDb.Balance += amount;
         await _cardRepository.SaveAsync();
-        return new Operation() {RecipientСardNumber = cardToDb.CardNumber, Amount = amount, IsCompleted = true};
+        
+        Operation operation = new Operation()
+        {
+            RecipientСardNumber = cardNumber, 
+            Amount = amount, CardId = cardId, 
+            IsCompleted = true
+        };
+        
+        await _operationRepository.CreateOperation(operation);
+        return operation;
     }
 }

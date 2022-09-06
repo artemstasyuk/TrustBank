@@ -1,7 +1,7 @@
 using System.Text;
 using BankApplication.Infrastructure.AuthService;
 using BankApplication.Infrastructure.TransferService;
-using BBankApplication.Infrastructure.TransferService;
+using BankApplication.Infrastructure.TransferService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.IdentityModel.Tokens;
@@ -43,6 +43,7 @@ builder.Services.AddTransient<ICardRepository, CardRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IProfileRepository, ProfileRepository>();
 builder.Services.AddTransient<ICardSampleRepository, CardSampleRepository>();
+builder.Services.AddTransient<IOperationRepository, OperationRepository>();
 builder.Services.AddTransient<ITransferService, TransferService>();
 builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddTransient<ISmsService, SmsService>();
@@ -95,5 +96,10 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "cardsFilter",
     pattern: "{controller=Cards}/{action=Index}/{type?}");
+/*
+app.MapControllerRoute(
+    name: "transfer",
+    pattern: "{controller=Transfer}/{action=Replenish}/{cardId}");
+    */
 
 app.Run();

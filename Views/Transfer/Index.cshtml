@@ -16,8 +16,9 @@
                 </div>
             </div>
         </div>
-        <a asp-action="Transfer" asp-route-id = "@Model.Id"> Transfer </a>
-        <button> Replenish </button>
+        <a asp-action="Transfer" asp-route-id="@Model.Id"> Transfer </a>
+        <a asp-action="Replenish" asp-route-id="@Model.Id"> Replenish </a>
+        <a asp-action="History" asp-route-cardId="@Model.Id">History</a>
         <button> Pay </button>
     </div>
 </div>
