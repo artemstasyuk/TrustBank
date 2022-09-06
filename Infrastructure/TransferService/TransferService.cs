@@ -1,7 +1,4 @@
-﻿using BankApplication.Infrastructure.TransferService;
-using BankApplication.Views.Transfer;
-
-namespace BankApplication.Infrastructure.TransferService;
+﻿namespace BankApplication.Infrastructure.TransferService;
 
 public class TransferService : ITransferService
 {
@@ -14,26 +11,47 @@ public class TransferService : ITransferService
         _cardRepository = cardRepository;
     }
     
-    public async Task<Operation> TransferByCardNumber(int cardId, string cardNumber, double amount)
+    public async Task<Operation> TransferByCardNumber(int cardId, string cardNumber, decimal amount, CardOperationType type)
     {
-        Card cardFromDb = await _cardRepository.GetCardByIdAsync(cardId);
-        Card cardToDb = await _cardRepository.GetCardByCardNumberAsync(cardNumber);
-        //if (cardToDb is null)
+        bool isCompleted = false;
+        switch (type)
+        {
+            case CardOperationType.Replenish :
+            {
+                Card cardFromDb = await _cardRepository.GetCardByCardNumberAsync(cardNumber);
+                Card cardToDb = await _cardRepository.GetCardByIdAsync(cardId);
+                isCompleted = await CheckBalance(cardFromDb, cardToDb, amount);
+                break;
+            }
+            case CardOperationType.Transfer:
+            {
+                Card cardFromDb = await _cardRepository.GetCardByIdAsync(cardId);
+                Card cardToDb = await _cardRepository.GetCardByCardNumberAsync(cardNumber);
+                isCompleted = await CheckBalance(cardFromDb, cardToDb, amount);
+                break;
+            }
+        }
 
-        //if (cardFromDb.Balance < amount) 
-
-        cardFromDb.Balance -= amount;
-        cardToDb.Balance += amount;
-        await _cardRepository.SaveAsync();
-        
         Operation operation = new Operation()
         {
-            RecipientСardNumber = cardNumber, 
-            Amount = amount, CardId = cardId, 
-            IsCompleted = true
+            RecipientСardNumber = cardNumber,
+            Amount = amount, CardId = cardId,
+            IsCompleted = isCompleted
         };
         
         await _operationRepository.CreateOperation(operation);
         return operation;
+    }
+
+    public async Task<bool> CheckBalance(Card cardFromDb, Card cardToDb, decimal amount)
+    {
+        if(cardFromDb.Balance >= amount)
+        {
+            cardFromDb.Balance -= amount;
+            cardToDb.Balance += amount;
+            await _cardRepository.SaveAsync();
+            return true;
+        }
+        return false;
     }
 }

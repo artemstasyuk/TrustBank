@@ -3,6 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BankApplication.Models;
 
+public enum CardOperationType{
+    None,
+    Transfer,
+    Replenish
+}
+
 public class Operation
 {
     [Key]
@@ -11,11 +17,13 @@ public class Operation
     [ForeignKey("Card")]
     public int CardId { get; set; }
     
-    public double Amount { get; set; }
+    public decimal Amount { get; set; }
 
     public string RecipientСardNumber { get; set; }
     
     public bool IsCompleted { get; set; }
-    
+
+    public CardOperationType CardOperationType { get; set; }
+
     public Card Card { get; set; }
 }

@@ -1,7 +1,6 @@
 using System.Text;
 using BankApplication.Infrastructure.AuthService;
 using BankApplication.Infrastructure.TransferService;
-using BankApplication.Infrastructure.TransferService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.IdentityModel.Tokens;
@@ -58,11 +57,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     using var scope = app.Services.CreateScope();
-    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();   
     db.Database.EnsureCreated();
 }
 
-app.UseBrowserLink();   
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -96,10 +94,17 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "cardsFilter",
     pattern: "{controller=Cards}/{action=Index}/{type?}");
-/*
+
 app.MapControllerRoute(
     name: "transfer",
-    pattern: "{controller=Transfer}/{action=Replenish}/{cardId}");
-    */
+    pattern: "{controller=Transfer}/{action=Replenish}/{id?}");
+
+app.MapControllerRoute(
+    name: "transfer",
+    pattern: "{controller=Transfer}/{action=Transfer}/{id?}");
+
+app.MapControllerRoute(
+    name: "transfer",
+    pattern: "{controller=Transfer}/{action=History}/{id?}");
 
 app.Run();

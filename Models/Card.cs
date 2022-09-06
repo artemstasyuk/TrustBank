@@ -29,7 +29,7 @@ public class Card
     public string CardSurname { get; set; }
     
     [Display(Name = "Balance")]
-    public double Balance { get; set; }
+    public decimal Balance { get; set; }
 
     [BindNever]
     public CardStatus CardStatus { get; set; }

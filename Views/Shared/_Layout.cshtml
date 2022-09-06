@@ -34,7 +34,7 @@
                     <img class="user" src="/img/user.png" alt="user">
                     @if (!User.Identity.IsAuthenticated)
                     {
-                        <button class="nav-button"><a asp-controller="Auth" asp-action="Login">Log In</a></button>
+                        <a class="nav-button" asp-controller="Auth" asp-action="Login">Log In</a>
                     }
                     else
                     {

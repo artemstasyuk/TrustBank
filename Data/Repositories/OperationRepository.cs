@@ -11,7 +11,7 @@ public class OperationRepository : IOperationRepository
 
     public async Task CreateOperation(Operation operation)
     {
-        _dbContext.Operations.Add(operation);
+        await _dbContext.Operations.AddAsync(operation);
         await SaveAsync();
     }
 

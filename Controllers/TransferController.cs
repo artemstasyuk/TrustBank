@@ -32,7 +32,7 @@ public class TransferController : Controller
     {
         if (ModelState.IsValid)
         { 
-            var opId = await _transferService.TransferByCardNumber(id, viewModel.RecipientСardNumber, viewModel.Amount);
+            var opId = await _transferService.TransferByCardNumber(id, viewModel.RecipientСardNumber, viewModel.Amount, CardOperationType.Transfer);
             return RedirectToAction("Receipt", opId);
         }
 
@@ -45,10 +45,8 @@ public class TransferController : Controller
     public async Task<ActionResult> Replenish(int id, OperationViewModel viewModel)
     {
         if (ModelState.IsValid)
-        {
-            var cardFrom = await  _cardRepository.GetCardByCardNumberAsync(viewModel.RecipientСardNumber);
-            var cardTo =  await _cardRepository.GetCardByIdAsync(id);
-            var operation = await _transferService.TransferByCardNumber(cardFrom.Id, cardTo.CardNumber, viewModel.Amount);
+        {            
+            var operation = await _transferService.TransferByCardNumber(id, viewModel.RecipientСardNumber, viewModel.Amount, CardOperationType.Replenish);
             return RedirectToAction("Receipt", operation);
         }
 
@@ -56,14 +54,14 @@ public class TransferController : Controller
     }
 
 
-    public async Task<ActionResult> Receipt(Operation operation)
+    public ActionResult Receipt(Operation operation)
     {
         return View(operation);
     }
 
-    public async Task<ActionResult> History(int cardId)
+    public async Task<ActionResult> History(int id)
     {
-        List<Operation> operations = await _operationRepository.GetAllOperations(cardId);
+        List<Operation> operations = await _operationRepository.GetAllOperations(id);
         return View(operations);
     }
 }
