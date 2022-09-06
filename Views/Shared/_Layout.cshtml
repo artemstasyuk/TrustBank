@@ -11,7 +11,8 @@
     <style>
         .input-validation-error {
             border-color: red;
-            background-color: #fff;
+            background-color: #24262D;
+            color: darkred;
         }
     </style>
 </head>
@@ -30,7 +31,7 @@
                         <a class="nav-item" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
                     </nav>
                 </div>
-                <div class="col-md-2 offset-md-2">
+                <div class="col-2 offset-2" style="padding-left: 60px;">
                     <img class="user" src="/img/user.png" alt="user">
                     @if (!User.Identity.IsAuthenticated)
                     {

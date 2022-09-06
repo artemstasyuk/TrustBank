@@ -5,57 +5,50 @@
             <img class="ellipse-1" src="/img/ellipse1.png" alt="ellipse">
         </div>
         <div class="col-md-6 offset-md-1">
-                <div id="container">
-                    <br/>
-                    <h1>&bull; Registration &bull;</h1>
-                    <br/>
-                    <div class="underline">
+            <div id="container">
+                <br />
+                <h1>&bull; Registration &bull;</h1>
+                <br />
+                <div class="underline">
+                </div>
+                <form class="form" asp-action="Registration" asp-controller="Auth" asp-anti-forgery="true">
+                    <div class="form_group">
+                        <label class="main-text" asp-for="Email">Email</label><br />
+                        <input class="form_input" type="text" asp-for="Email" />
+                        <span class="input-validation-error" asp-validation-for="Email" />
                     </div>
-                    <form class="form"asp-action="Registration" asp-controller="Auth" asp-anti-forgery="true">
-                        <div class="form_group">
-                            <label class="login_label" asp-for="Email">Email</label><br/>
-                            <input class="form_input" type="text" asp-for="Email"/>
-                            <span class="input-validation-error" asp-validation-for="Email"/>
-                        </div>
 
-                        <div class="form_group">
-                            <label class="login_label" asp-for="AccountName">Name</label><br/>
-                            <input class="form_input" type="text" asp-for="AccountName"/>
-                            <span class="input-validation-error" asp-validation-for="AccountName"/>
+                    <div class="form_group">
+                        <label class="main-text" asp-for="AccountName">Name</label><br />
+                        <input class="form_input" type="text" asp-for="AccountName" />
+                        <span class="input-validation-error" asp-validation-for="AccountName" />
+                    </div>
+                    <div class="form_group">
+                        <label class="main-text" asp-for="AccountSurname">Surname</label><br />
+                        <input class="form_input" type="text" asp-for="AccountSurname" />
+                        <span class="input-validation-error" asp-validation-for="AccountSurname" />
+                    </div>
+                    <div class="row">
+                        <div class="form_group col-5">
+                            <label class="main-text" asp-for="Password">Password</label><br />
+                            <input type="password" class="form_input password_input" asp-for="Password" />
+                            <span class="input-validation-error" asp-validation-for="Password" />
                         </div>
-                        <div class="form_group">
-                            <label class="login_label" asp-for="AccountSurname">Surname</label><br/>
-                            <input class="form_input" type="text" asp-for="AccountSurname"/>
-                            <span class="input-validation-error" asp-validation-for="AccountSurname"/>
+                        <div class="form-group col-5 offset-2">
+                            <label class="main-text" asp-for="ConfirmPassword">Confirm Password</label><br />
+                            <input type="password" class="form_input confirm_input" asp-for="ConfirmPassword" />
+                            <span class="input-validation-error" asp-validation-for="ConfirmPassword" />
                         </div>
-                        <div class="form_group">
-                            <label class="login_label" asp-for="Password">Password</label><br/>
-                            <input class="form_input" asp-for="Password"/>
-                            <span class="input-validation-error" asp-validation-for="Password"/>
-                        </div>
-                        <div class="form-group">
-                            <label class="login_label" asp-for="ConfirmPassword">Confirm Password</label><br/>
-                            <input class="form_input" asp-for="ConfirmPassword"/>
-                            <span class="input-validation-error" asp-validation-for="ConfirmPassword"/>
-                        </div>
-                        <dl></dl>
-                        <div>
-                            <button class="nav-button"> Enter </button>
-                        </div>
-                    </form><!-- // End form -->
-                </div><!-- // End #container -->
-           </div>
-            <div class="col-md-1 offset-md-1">
-                <img class="ellipse-2" src="/img/ellipse2.png" alt="ellipse">
-            </div>
+                    </div>
+
+                    <div class="submit">
+                        <input type="submit" value="ENTER" id="form_button" />
+                    </div>
+                </form><!-- // End form -->
+            </div><!-- // End #container -->
         </div>
-    </div>
-<div class="cards">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3 cards">
-                <img class="cards-img" src="/img/cards.png" alt="cards">
-            </div>
+        <div class="col-md-1 offset-md-1">
+            <img class="ellipse-2" src="/img/ellipse2.png" alt="ellipse">
         </div>
     </div>
 </div>

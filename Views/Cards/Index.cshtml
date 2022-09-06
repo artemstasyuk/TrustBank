@@ -12,7 +12,7 @@
     
     <div class="card-nav text-center">
         <div class="card-nav-items col-4 offset-4">
-            <a class="card-nav-item active">All Cards</a>
+            <a class="card-nav-item active" asp-controller="Cards" asp-action="Index">All Cards</a>
             <a class="card-nav-item" asp-controller="Cards" asp-action="Index" asp-route-type="Debit">Debit</a>
             <a class="card-nav-item" asp-controller="Cards" asp-action="Index" asp-route-type="Credit">Credit</a>
             <a class="card-nav-item" asp-controller="Cards" asp-action="Index" asp-route-type="Special">Special</a>
@@ -69,8 +69,8 @@
                     </div>
 
                 </div>
-                <a class="btn btn-light me-1" asp-action="Checkout">Checkout</a>
-                <button class="btn btn-primary" id="myBtn">More</button>
+                <a class="main-btn btn-start me-1" asp-action="Checkout">Checkout</a>
+                <button class="main-btn btn-watch" id="myBtn">More</button>
             </div>
         }
         
