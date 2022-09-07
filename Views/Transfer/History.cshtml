@@ -24,12 +24,12 @@
                             break;
                             
                         case CardOperationType.Replenish:
-                            if (item.CardToId == Model.CardId)
+                            if (item.CardFromId == Model.CardId)
                             {
                                 ViewData["amount"] = "-";
                                 <h1>Debiting</h1>
                             }
-                            if(item.CardFromId == Model.CardId)
+                            if(item.CardToId == Model.CardId)
                             {
                                 ViewData["amount"] = "+";
                                 <h1>Replenishment</h1>

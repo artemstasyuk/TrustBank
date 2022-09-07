@@ -13,43 +13,59 @@ public class TransferService : ITransferService
     
     public async Task<Operation> TransferByCardNumber(int cardFromId, string cardNumber, decimal amount, CardOperationType type)
     {
-        bool isCompleted = false;
-        int cardToId = new int();
-        switch (type)
-        {
-            case CardOperationType.Replenish :
-            {
-                Card cardFromDb = await _cardRepository.GetCardByCardNumberAsync(cardNumber);
-                cardToId = cardFromDb.Id;
-                Card cardToDb = await _cardRepository.GetCardByIdAsync(cardFromId);
-                isCompleted = await CheckBalance(cardFromDb, cardToDb, amount);
-                break;
-            }
-            case CardOperationType.Transfer:
-            {
-                Card cardFromDb = await _cardRepository.GetCardByIdAsync(cardFromId);
-                Card cardToDb = await _cardRepository.GetCardByCardNumberAsync(cardNumber);
-                cardToId = cardToDb.Id;
-                isCompleted = await CheckBalance(cardFromDb, cardToDb, amount);
-                break;
-            }
-        }
+        var cardToDb = await GetCard(cardNumber);
+        Card cardFromDb = await _cardRepository.GetCardByIdAsync(cardFromId);
         
         Operation operation = new()
         {
             CardOperationType = type,
             RecipientСardNumber = cardNumber,
-            CardFromId = cardFromId,
-            CardToId = cardToId,
+            CardFromId = cardFromDb.Id,
+            CardToId = cardToDb.Id,
             Amount = amount, 
-            IsCompleted = isCompleted
+            IsCompleted = await IsSufficientBalance(cardFromDb, cardToDb, amount)
         };
         
         await _operationRepository.CreateOperation(operation);
         return operation;
+    } 
+    public async Task<Operation> ReplenishByCardNumber(int cardTo, string cardNumber, decimal amount, string cvv, string validity, CardOperationType type)
+    {
+        var cardFromDb = await GetCard(cardNumber);
+        if (CheckCardCredentials(cvv, validity, cardFromDb))
+        {
+
+            Card cardToDb = await _cardRepository.GetCardByIdAsync(cardTo);
+
+            Operation operation = new()
+            {
+                CardOperationType = type,
+                RecipientСardNumber = cardNumber,
+                CardFromId = cardFromDb.Id,
+                CardToId = cardToDb.Id,
+                Amount = amount,
+                IsCompleted = await IsSufficientBalance(cardFromDb, cardToDb, amount)
+            };
+
+            await _operationRepository.CreateOperation(operation);
+            return operation;
+        }
+
+        throw new BadHttpRequestException("Invalid card credentials");
     }
 
-    public async Task<bool> CheckBalance(Card cardFromDb, Card cardToDb, decimal amount)
+    private async Task<Card> GetCard(string cardNumber)
+    {
+        var card = await _cardRepository.GetCardByCardNumberAsync(cardNumber);
+        if (card is null) throw new BadHttpRequestException("Card doesn't exist");
+        return card;
+    }
+
+    private bool CheckCardCredentials(string cvv, string validity, Card card) =>
+        card.CVV.Equals(cvv) && card.Validity.Equals(validity);
+            
+
+    private async Task<bool> IsSufficientBalance(Card cardFromDb, Card cardToDb, decimal amount)
     {
         if(cardFromDb.Balance >= amount)
         {
@@ -60,4 +76,5 @@ public class TransferService : ITransferService
         }
         return false;
     }
+
 }

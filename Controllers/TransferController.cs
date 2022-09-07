@@ -26,12 +26,12 @@ public class TransferController : Controller
     public ActionResult Transfer() => View();
     
     [HttpPost]
-    public async Task<ActionResult> Transfer(int id ,OperationViewModel viewModel)
+    public async Task<ActionResult> Transfer(int id , TransferOperationViewModel viewModel)
     {
         if (ModelState.IsValid)
         { 
-            var opId = await _transferService.TransferByCardNumber(id, viewModel.RecipientСardNumber, viewModel.Amount, CardOperationType.Transfer);
-            return RedirectToAction("Receipt", opId);
+            var operation = await _transferService.TransferByCardNumber(id, viewModel.RecipientСardNumber, viewModel.Amount, CardOperationType.Transfer);
+            return RedirectToAction("Receipt", operation);
         }
 
         return View();
@@ -40,11 +40,12 @@ public class TransferController : Controller
     [HttpGet]
     public ActionResult Replenish() => View();
 
-    public async Task<ActionResult> Replenish(int id, OperationViewModel viewModel)
+    public async Task<ActionResult> Replenish(int id, ReplenishOperationViewModel viewModel)
     {
         if (ModelState.IsValid)
-        {            
-            var operation = await _transferService.TransferByCardNumber(id, viewModel.RecipientСardNumber, viewModel.Amount, CardOperationType.Replenish);
+        {
+            var operation = await _transferService.ReplenishByCardNumber(id, viewModel.CardNumber, viewModel.Amount,
+                viewModel.CVV, viewModel.Validity, CardOperationType.Replenish);
             return RedirectToAction("Receipt", operation);
         }
 
