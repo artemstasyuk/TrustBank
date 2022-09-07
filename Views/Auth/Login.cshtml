@@ -16,13 +16,13 @@
                     <div class="form_group">
                         <label class="main-text" asp-for="Email">Email</label>
                         <input class="form_input" type="email" asp-for="Email"/>
-                        <span asp-validation-for="Email"/>
+                        <span class="input-validation-error" asp-validation-for="Email" />
                     </div>
            
                     <div class="form_group">
-                        <label class="main-text" asp-for="Password">Password</label>
-                        <input class="form_input" asp-for="Password"/>
-                        <span asp-validation-for="Password"/>
+                        <label class="main-text" asp-for="Password">Password</label><br />
+                        <input type="password" class="form_input password_input" asp-for="Password" />
+                        <span class="input-validation-error" asp-validation-for="Password" />
                     </div>
                                             
                     <div class="submit">
@@ -30,6 +30,7 @@
                     </div>                                        
                 </form><!-- // End form -->
                 <a class="nav-item" style="padding:0; margin-left: 35px;" asp-controller="Auth" asp-action="Registration"> Don't have an account?  </a>
+                <dl></dl>
             </div><!-- // End #container -->
         </div>
         <div class="col-md-1 offset-md-1">

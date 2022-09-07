@@ -18,11 +18,9 @@ public class TransferController : Controller
     }
 
     [HttpGet]
-    public async Task<ActionResult> Index(int id)
-    {
-        var card = await _cardRepository.GetCardByIdAsync(id);
-        return View(card);
-    }
+    public async Task<ActionResult> Index(int id) => 
+        View(await _cardRepository.GetCardByIdAsync(id));
+    
 
     [HttpGet]
     public ActionResult Transfer() => View();
@@ -54,14 +52,11 @@ public class TransferController : Controller
     }
 
 
-    public ActionResult Receipt(Operation operation)
-    {
-        return View(operation);
-    }
+    public ActionResult Receipt(Operation operation) => 
+        View(operation);
+    
 
-    public async Task<ActionResult> History(int id)
-    {
-        List<Operation> operations = await _operationRepository.GetAllOperations(id);
-        return View(operations);
-    }
+    public async Task<ActionResult> History(int id) => 
+        View(new HistoryViewModel(){CardId = id, Operations = await _operationRepository.GetAllOperations(id)});
+    
 }

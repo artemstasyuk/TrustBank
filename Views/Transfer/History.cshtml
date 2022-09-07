@@ -1,12 +1,41 @@
-﻿@model List<Operation>
+﻿
+@model HistoryViewModel
 
-@foreach (var item in Model)
+@foreach (var item in Model.Operations)
 {
     <div class="card-item">
         <a class="card-item-type"><img width="25" class="me-2" src="/img/shopping-cart.png"/><b>Debit</b></a>
         <div class="row mt-5">
             <div class="col-6">
                 <div class="row mt-4">
+                    @switch (item.CardOperationType)
+                    {
+                        case CardOperationType.Transfer:
+                            if (item.CardToId == Model.CardId)
+                            {
+                                ViewData["amount"] = "+";
+                                <h1>Replenishment</h1>
+                            }
+                            if(item.CardFromId == Model.CardId)
+                            {
+                                ViewData["amount"] = "-";
+                                <h1>Debiting</h1>
+                            }
+                            break;
+                            
+                        case CardOperationType.Replenish:
+                            if (item.CardToId == Model.CardId)
+                            {
+                                ViewData["amount"] = "-";
+                                <h1>Debiting</h1>
+                            }
+                            if(item.CardFromId == Model.CardId)
+                            {
+                                ViewData["amount"] = "+";
+                                <h1>Replenishment</h1>
+                            }
+                            break;
+                    }
                     <div class="col-3">
                         <b class="card-item-text">@item.Id</b>
                     </div>
@@ -14,7 +43,7 @@
                         <b class="card-item-text">@item.RecipientСardNumber</b>
                     </div>
                     <div class="col-3 offset-1">
-                        <b class="card-item-text">@item.Amount</b>
+                        <b class="card-item-text">@ViewData["amount"] @item.Amount</b>
                     </div>
                 </div>
             </div>

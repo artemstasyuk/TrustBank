@@ -15,7 +15,9 @@ public class Operation
     public int Id { get; set; }
     
     [ForeignKey("Card")]
-    public int CardId { get; set; }
+    public int CardFromId { get; set; }
+    
+    public int CardToId { get; set; }
     
     public decimal Amount { get; set; }
 

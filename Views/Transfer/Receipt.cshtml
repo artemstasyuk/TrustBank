@@ -13,9 +13,13 @@
                         <b class="card-item-text">Operation number</b>
                         <p>@Model.Id</p>
                     </div>
+                     @{
+                         if (Model.CardOperationType == CardOperationType.Transfer) ViewData["amount"] = "-";
+                         if (Model.CardOperationType == CardOperationType.Replenish) ViewData["amount"] = "+";
+                     }
                     <div class="col-3">
                         <b class="card-item-text">Amount</b>
-                        <p>@Model.Amount</p>
+                        <p>@ViewData["amount"]@Model.Amount</p>
                     </div>
                 </div>
             </div>
