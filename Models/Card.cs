@@ -24,6 +24,8 @@ public class Card
     
     public string CVV { get; set; }
     
+    public string Validity { get; set; }
+    
     public string CardName { get; set; }
     
     public string CardSurname { get; set; }

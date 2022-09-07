@@ -1,6 +1,6 @@
 ﻿namespace BankApplication.ViewModels;
 
-public class OperationViewModel
+public class TransferOperationViewModel
 {
     public decimal Amount { get; set; }
 

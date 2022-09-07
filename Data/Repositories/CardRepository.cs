@@ -14,6 +14,7 @@ public class CardRepository : ICardRepository
     public async Task CreateCardAsync(Card card, int profileId)
     {
         card.CardStatus = CardStatus.Active;
+        card.Validity = DateTime.Now.AddYears(3).ToString("MM/yyyy");
         card.CardNumber = GenerateCardNumber();
         card.CVV = GenerateCvvCode();
         card.ProfileId = profileId;

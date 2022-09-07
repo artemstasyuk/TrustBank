@@ -1,4 +1,4 @@
-﻿@model OperationViewModel
+﻿@model ReplenishOperationViewModel
 
 
 <div class="container">
@@ -9,15 +9,25 @@
         <div class="col-md-6 offset-md-1">
             <div id="container">
                 <br/>
-                <h1>&bull; Transfer &bull;</h1>
+                <h1>&bull; Replenish &bull;</h1>
                 <br/>
                 <div class="underline">
                 </div>
                 <form class="form" asp-action="Replenish" asp-anti-forgery="true">
                     <div class="form_group">
-                        <label class="main-text" asp-for="RecipientСardNumber"> Card Number</label>
-                        <input class="form_input" placeholder=" " type="text" asp-for="RecipientСardNumber"/>
+                        <label class="main-text" asp-for="CardNumber"> Card Number</label>
+                        <input class="form_input" placeholder=" " type="text" asp-for="CardNumber"/>
                     </div>
+                    <div class="form_group">
+                        <label class="main-text" asp-for="Validity"> Validity </label>
+                        <input class="form_input" placeholder=" " type="text" asp-for="Validity"/>
+                    </div>
+                
+                    <div class="form_group">
+                        <label class="main-text" asp-for="CVV"> CVV </label>
+                        <input class="form_input" placeholder=" " type="text" asp-for="CVV"/>
+                    </div>
+                    
                     <div class="form_group">
                         <label class="main-text" asp-for="Amount"> Amount </label>
                         <input class="form_input" placeholder=" " type="text" asp-for="Amount"/>
