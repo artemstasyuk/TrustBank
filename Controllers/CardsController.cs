@@ -22,7 +22,7 @@ namespace BankApplication.Controllers
         
         public async Task<IActionResult> Index(string type)
         {
-            var samples = new List<CardSample>();
+            List<CardSample> samples;
             if(type == null)
             {
                 samples = await _cardSampleRepository.GetAll();

@@ -31,19 +31,32 @@
                         <a class="nav-item" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
                     </nav>
                 </div>
-                <div class="col-2 offset-2" style="padding-left: 60px;">
-                    <img class="user" src="/img/user.png" alt="user">
+                <div class="col-md-3 offset-md-1">                    
                     @if (!User.Identity.IsAuthenticated)
                     {
-                        <a class="nav-button" asp-controller="Auth" asp-action="Login">Log In</a>
+                        <div style="padding-left: 130px;">
+                            <img class="user" src="/img/user.png" alt="user">
+                            <a class="nav-button" style="cursor:pointer;" asp-controller="Auth" asp-action="Login">Log In</a>
+                       </div>
                     }
                     else
                     {
                         var jwtName = Context.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name);
                         var jwtSurname = Context.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Surname);
                         var login = $"{jwtName.Value} {jwtSurname.Value}";
-                        
-                        <button class="nav-button">@login</button>
+
+                        <div style="padding-left: 40px;">
+                            <img class="user" src="/img/user.png" alt="user">
+                            <div class="dropdown" style="display: inline;">
+                                <a class="nav-button dropdown-toggle" style="cursor:pointer;" data-bs-toggle="dropdown" aria-expanded="false">
+                                    @login
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="dropdown-item" asp-controller="Profile" asp-action="Index">My profile</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Auth" asp-action="Logout">Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     }
                 </div>
             </div>
@@ -55,7 +68,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-    <script src="~/lib/bootstrap.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js"></script>
 </body>
 </html>

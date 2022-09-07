@@ -5,14 +5,12 @@ namespace BankApplication.Controllers;
 
 public class ProfileController : Controller
 {
-    private readonly IProfileRepository _profileRepository;
-    private readonly IUserRepository _userRepository;
+    private readonly IProfileRepository _profileRepository;    
     private readonly ICardRepository _cardRepository;
     
-    public ProfileController(IProfileRepository profileRepository, IUserRepository userRepository, ICardRepository cardRepository)
+    public ProfileController(IProfileRepository profileRepository, ICardRepository cardRepository)
     {
-        _cardRepository = cardRepository;
-        _userRepository = userRepository;
+        _cardRepository = cardRepository;      
         _profileRepository = profileRepository;
     }
     

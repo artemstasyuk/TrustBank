@@ -1,5 +1,4 @@
-﻿using BankApplication.Extensions;
-using BankApplication.Infrastructure.AuthService;
+﻿using BankApplication.Infrastructure.AuthService;
 
 namespace BankApplication.Controllers.AccountControllers;
 
