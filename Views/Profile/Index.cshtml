@@ -1,38 +1,47 @@
 ﻿@model Profile
 <div class="container">
-    
+
     <div class="cards-title text-center mt-5">
         <h1 class="cards-header">Profile</h1>
     </div>
-    <div class="card-list mt-5">
-        <div class="card-item">
-            <div class="row mt-5">
-                <div class="col-6">
-                    <div class="row mt-4">
-                        <div class="col-3">
-                            <b class="card-item-text">Email</b>
-                            <p>@Model.Email</p>
-                        </div>
-                        <div class="col-3 offset-1">
-                            <b class="card-item-text">Name</b>
-                            <p>@Model.Name</p>
-                        </div>
-                        <div class="col-3 offset-1">
-                            <b class="card-item-text">Surname</b>
-                            <p>@Model.Surname</p>
-                        </div>
+
+    <div class="profile mt-5">
+        <div class="row">
+            <div class="col-md-2">
+                <img class="profile-avatar" src="~/img/giga ava.jpeg" />
+            </div>
+            <div class="col-md-6 offset-md-1">
+                <div class="row">
+                    <div class="col-md-1 offset-md-1">
+                        <b class="card-item-text">Name</b>
+                        <p>@Model.Name</p>
+                        <b class="card-item-text">Email</b>
+                        <p>@Model.Email</p>
+                    </div>
+                    <div class="col-md-1 offset-md-1">
+                        <b class="card-item-text">Surname</b>
+                        <p>@Model.Surname</p>
                     </div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <a class="btn btn-warning btn-sm">Operations history</a>
+                    </div>
+                    <div class="col-md-6">
+                        <a class="btn btn-warning btn-sm">Cashback/bonuses</a>
+                    </div>
+                </div>
+            </div>                                  
         </div>
     </div>
+
     <div class="card-list mt-5">
         @if (Model.Cards.Count != 0)
         {
             foreach (var item in Model.Cards)
             {
                 <div class="card-item">
-                    <a class="card-item-type"><img width="25" class="me-2" src="/img/shopping-cart.png"/><b>Debik</b></a>
+                    <a class="card-item-type"><img width="25" class="me-2" src="/img/shopping-cart.png" /><b>Debit</b></a>
                     <div class="row mt-5">
                         <div class="col-6">
                             <div class="row mt-4">
@@ -52,7 +61,7 @@
                             </div>
                         </div>
                         <div class="col-3 offset-2">
-                            <img width=330 src="/img/bank-card.png"/>
+                            <img width=330 src="/img/bank-card.png" />
                         </div>
                     </div>
                 </div>
@@ -61,8 +70,10 @@
         }
         else
         {
-            <a asp-controller="Cards" asp-action="Checkout"> You haven't got a card yet ?</a>
+            <a class="nav-item" asp-controller="Cards" asp-action="Checkout"> You haven't got a card yet ?</a>
         }
     </div>
+
 </div>
-                
+
+

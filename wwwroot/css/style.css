@@ -510,3 +510,17 @@ label{
 .contacts{
     margin-top: 145px;
 }
+
+
+/*PROFILE*/
+.profile {
+    border-radius: 30px;
+    padding: 20px;
+    width: 70%;
+}
+
+.profile-avatar {
+    border-radius: 100%;
+    width: 200px;
+    height: 180px;
+}
