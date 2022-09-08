@@ -27,7 +27,7 @@ public class EmailService : IEmailService
             
             message.Body =  body; // message body
 
-            using (SmtpClient client = new SmtpClient("smtp.gmail.com", 587)) // using Google server
+            using (SmtpClient client = new SmtpClient("smtp.yandex.ru", 587)) // using Google server
             {
                 client.Credentials = new NetworkCredential(
                     _configuration.GetSection("GmailData:MailAddress").Value, // email
