@@ -8,30 +8,35 @@
     <div class="profile mt-5">
         <div class="row">
             <div class="col-md-2">
-                <img class="profile-avatar" src="~/img/giga ava.jpeg" />
+                <img class="profile-avatar" src="~/img/giga ava.jpeg" />   <!--add ImageUrl to model Profile-->
+                <a class="edit-btn" href="#edit avatar"><img src="/img/edit-icon.png" width="30" /></a>  <!--add EditAvatar action-->
             </div>
             <div class="col-md-6 offset-md-1">
-                <div class="row">
-                    <div class="col-md-1 offset-md-1">
+                <div class="row profile-info">
+
+                    <div class="col-md-5 offset-md-1">
                         <b class="card-item-text">Name</b>
                         <p>@Model.Name</p>
                         <b class="card-item-text">Email</b>
                         <p>@Model.Email</p>
                     </div>
-                    <div class="col-md-1 offset-md-1">
+                    <div class="col-md-5">
                         <b class="card-item-text">Surname</b>
                         <p>@Model.Surname</p>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <a class="btn btn-warning btn-sm">Operations history</a>
+
+                    <div class="row mt-2">
+                        <div class="col-md-5 offset-1">
+                            <img class="user" src="/img/history.png" alt="user">
+                            <a class="btn btn-watch btn-sm mt-1 btn-profile">Cost Analytics</a>
+                        </div>
+                        <div class="col-md-6">
+                            <img class="user" src="/img/bonus.png" alt="user">
+                            <a class="btn btn-watch btn-sm mt-1 btn-profile">Cashback/bonuses</a>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <a class="btn btn-warning btn-sm">Cashback/bonuses</a>
-                    </div>
                 </div>
-            </div>                                  
+            </div>
         </div>
     </div>
 
@@ -42,38 +47,32 @@
             {
                 <div class="card-item">
                     <a class="card-item-type"><img width="25" class="me-2" src="/img/shopping-cart.png" /><b>Debit</b></a>
-                    <div class="row mt-5">
-                        <div class="col-6">
-                            <div class="row mt-4">
-                                <div class="col-3">
-                                    <b class="card-item-text">@item.CardName</b>
-                                </div>
-                                <div class="col-3 offset-1">
-                                    <b class="card-item-text">@item.CardSurname</b>
-                                </div>
-                                <div class="col-3 offset-1">
-                                    <b class="card-item-text">@item.CardNumber</b>
-                                </div>
-                                <div class="col-3 offset-1">
-                                    <b class="card-item-text">@item.CVV</b>
-                                </div>
-
+                    <div class="row mt-3">
+                        <div class="col-4">
+                            <img width=330 src="/img/bank-card.png"/>                            
+                        </div>
+                        <div class="col-5">
+                            <h4>Your balance: $@item.Balance</h4>
+                            <p><i class="card-info-header">Owner:</i> @item.CardName @item.CardSurname</p>
+                            <p><i class="card-info-header">Card number:</i> @item.CardNumber</p>
+                            <p><i class="card-info-header">Сard expiry date:</i> @item.Validity</p>
+                            <p><i class="card-info-header">CVV:</i> @item.CVV</p>
+                            <div class="mt-4">
+                                <a class="main-btn btn-card" id="myBtn">Transfer</a>
+                                <a class="main-btn btn-card" id="myBtn">Replenish</a>
+                                <a class="main-btn btn-card btn-history" id="myBtn">Operations History</a>
                             </div>
                         </div>
-                        <div class="col-3 offset-2">
-                            <img width=330 src="/img/bank-card.png" />
-                        </div>
-                    </div>
-                </div>
-                <a asp-controller="Transfer" asp-action="Index" asp-route-id="@item.Id"> Check </a>
+                    </div>                    
+                </div>                
             }
         }
         else
         {
-            <a class="nav-item" asp-controller="Cards" asp-action="Checkout"> You haven't got a card yet ?</a>
+            <img src="~/img/question.png" />
+            <a class="nav-item" asp-controller="Cards" asp-action="Index"> You haven't got a card yet ?</a>
         }
     </div>
-
 </div>
 
 

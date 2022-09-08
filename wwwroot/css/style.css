@@ -517,10 +517,76 @@ label{
     border-radius: 30px;
     padding: 20px;
     width: 70%;
+    
+}
+.profile-info {
+    border-right: 2px solid gray;       
 }
 
 .profile-avatar {
     border-radius: 100%;
     width: 200px;
     height: 180px;
+    border: 1px solid gray;   
 }
+
+.btn-profile {
+    color: #589BC4;
+    border-color: #589BC4;
+}
+    .btn-profile:hover {
+        color: white;
+        background-color: #589BC4;
+    }
+
+    .edit-btn:hover {
+        cursor: pointer;
+    }
+
+.btn-card {
+    padding: 6px 8px;
+    cursor: pointer;
+    border-radius: 10px;
+    background: black;
+    color: white;       
+    -webkit-transition: width 2s, height 2s, background-color 2s, -webkit-transform 2s;
+    transition: width 2s, height 2s, background-color 2s, transform 2s;
+}
+    .btn-card:hover {
+        background: white;
+        color: black;       
+    }
+.btn-history {
+    background: white;
+    color: black;
+}
+    .btn-history:hover {
+        background: black;
+        color: white;
+    }
+
+.card-info-header {
+    color: #FDCF49;
+}
+
+
+
+
+
+.password {
+    position: relative;
+}
+
+.password-control {
+    position: absolute;
+    top: 11px;
+    right: 6px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url(/img/eye.svg) 0 0 no-repeat right;
+}
+
+    .password-control.view {
+        background: url(/img/eye-password-hide.svg) 0 0 no-repeat;
+    }
