@@ -1,5 +1,6 @@
 using System.Text;
 using BankApplication.Infrastructure.AuthService;
+using BankApplication.Infrastructure.ImageService;
 using BankApplication.Infrastructure.TransferService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.CookiePolicy;
@@ -47,6 +48,7 @@ builder.Services.AddTransient<ITransferService, TransferService>();
 builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddTransient<ISmsService, SmsService>();
 builder.Services.AddTransient<ITokenService, TokenService>();
+builder.Services.AddTransient<IFileUploadService, FileUploadService>();
 
 builder.Services.AddScoped(sp => SessionEmailToken.GetEmailToken(sp));
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

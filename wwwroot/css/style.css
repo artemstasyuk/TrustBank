@@ -590,3 +590,13 @@ label{
     .password-control.view {
         background: url(/img/eye-password-hide.svg) 0 0 no-repeat;
     }
+
+
+/*TRANSFER OPERATION*/
+.amount {
+    width: 36%;
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 15px;
+}

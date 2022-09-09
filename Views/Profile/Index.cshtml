@@ -1,28 +1,66 @@
-﻿@model Profile
+﻿@model ProfileViewModel
 <div class="container">
 
     <div class="cards-title text-center mt-5">
         <h1 class="cards-header">Profile</h1>
     </div>
 
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content" style="background-color: #24262D; padding-bottom: 0;">
+            <div class="row">
+                <div class="col-1 offset-11">
+                    <button class="btn btn-close btn-close-white close"></button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-10 offset-1">
+                    <h3 class="text-center" style="color: white;">EDIT PROFILE</h3>
+                    <form asp-action="EditProfile" asp-controller="Profile" method="post" enctype="multipart/form-data">
+                        <div class="form_group">
+                            <label class="main-text" asp-for="Profile.Name">Name</label><br />
+                            <input class="form_input" type="text" asp-for="Profile.Name" />
+                            <span class="input-validation-error" asp-validation-for="Profile.Name" />
+                        </div>
+                        <div class="form_group">
+                            <label class="main-text" asp-for="Profile.Surname">Surname</label><br />
+                            <input class="form_input" type="text" asp-for="Profile.Surname" />
+                            <span class="input-validation-error" asp-validation-for="Profile.Surname" />
+                        </div>
+
+                        <div class="form_group">
+                            <label class="main-text">Change profile photo</label><br />
+                            <input type="file" asp-for="PhotoProfile" /><br>
+                        </div>
+                        <div class="text-end">
+                            <input class="btn-watch mt-3" style="font-size:22px; border-radius:5px;" type="submit" value="Save" />
+                        </div>                      
+                    </form>                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <div class="profile mt-5">
         <div class="row">
             <div class="col-md-2">
-                <img class="profile-avatar" src="~/img/giga ava.jpeg" />   <!--add ImageUrl to model Profile-->
-                <a class="edit-btn" href="#edit avatar"><img src="/img/edit-icon.png" width="30" /></a>  <!--add EditAvatar action-->
+                <img class="profile-avatar" src="@Model.Profile.AvatarModel.Path" />
+                <a class="edit-btn" id="myBtn"><img src="/img/edit-icon.png" width="30" /></a>  
             </div>
+                                    
             <div class="col-md-6 offset-md-1">
                 <div class="row profile-info">
 
                     <div class="col-md-5 offset-md-1">
                         <b class="card-item-text">Name</b>
-                        <p>@Model.Name</p>
+                        <p>@Model.Profile.Name</p>
                         <b class="card-item-text">Email</b>
-                        <p>@Model.Email</p>
+                        <p>@Model.Profile.Email</p>
                     </div>
                     <div class="col-md-5">
                         <b class="card-item-text">Surname</b>
-                        <p>@Model.Surname</p>
+                        <p>@Model.Profile.Surname</p>
                     </div>
 
                     <div class="row mt-2">
@@ -41,9 +79,9 @@
     </div>
 
     <div class="card-list mt-5">
-        @if (Model.Cards.Count != 0)
+        @if (Model.Profile.Cards.Count != 0)
         {
-            foreach (var item in Model.Cards)
+            foreach (var item in Model.Profile.Cards)
             {
                 <div class="card-item">
                     <a class="card-item-type"><img width="25" class="me-2" src="/img/shopping-cart.png" /><b>Debit</b></a>
@@ -58,9 +96,9 @@
                             <p><i class="card-info-header">Сard expiry date:</i> @item.Validity</p>
                             <p><i class="card-info-header">CVV:</i> @item.CVV</p>
                             <div class="mt-4">
-                                <a class="main-btn btn-card" id="myBtn">Transfer</a>
-                                <a class="main-btn btn-card" id="myBtn">Replenish</a>
-                                <a class="main-btn btn-card btn-history" id="myBtn">Operations History</a>
+                                <a class="main-btn btn-card" asp-controller="Transfer" asp-action="Transfer" asp-route-id="@item.Id">Transfer</a>
+                                <a class="main-btn btn-card" asp-controller="Transfer" asp-action="Replenish" asp-route-id="@item.Id">Replenish</a>
+                                <a class="main-btn btn-card btn-history" asp-controller="Transfer" asp-action="History" asp-route-id="@item.Id">Operations History</a>
                             </div>
                         </div>
                     </div>                    

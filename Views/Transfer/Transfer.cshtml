@@ -20,27 +20,22 @@
                     </div>
                     <div class="form_group">
                         <label class="main-text" asp-for="Amount">Amount</label>
-                        <input class="form_input" placeholder=" " type="text" asp-for="Amount"/>
+                        <input class="form_input amount" placeholder="0" type="number" asp-for="Amount" />
+                        $
                     </div>
                    
                     <dl></dl>
-                        
-                    <div>
-                        <button class="nav-button"> Enter </button>
-                    </div>
-                    
-                </form><!-- // End form -->
-            </div><!-- // End #container -->
-        </div>
-    </div>
-</div>
-<div class="cards">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3 cards">
-                <img class="cards-img" src="/img/cards.png" alt="cards">
+
+                    <div class="submit">
+                        <input type="submit" value="Contact" id="form_button" />
+                    </div>                    
+                </form>
             </div>
         </div>
+        <div class="col-md-1 offset-md-1">
+            <img class="ellipse-2" src="/img/ellipse2.png" alt="ellipse">
+        </div>
     </div>
 </div>
+
 

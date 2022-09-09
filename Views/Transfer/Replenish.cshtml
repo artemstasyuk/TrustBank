@@ -8,48 +8,42 @@
         </div>
         <div class="col-md-6 offset-md-1">
             <div id="container">
-                <br/>
+                <br />
                 <h1>&bull; Replenish &bull;</h1>
-                <br/>
+                <br />
                 <div class="underline">
                 </div>
                 <form class="form" asp-action="Replenish" asp-anti-forgery="true">
                     <div class="form_group">
                         <label class="main-text" asp-for="CardNumber"> Card Number</label>
-                        <input class="form_input" placeholder=" " type="text" asp-for="CardNumber"/>
+                        <input class="form_input" placeholder=" " type="text" asp-for="CardNumber" />
                     </div>
                     <div class="form_group">
                         <label class="main-text" asp-for="Validity"> Validity </label>
-                        <input class="form_input" placeholder=" " type="text" asp-for="Validity"/>
+                        <input class="form_input" placeholder=" " type="text" asp-for="Validity" />
                     </div>
-                
-                    <div class="form_group">
-                        <label class="main-text" asp-for="CVV"> CVV </label>
-                        <input class="form_input" placeholder=" " type="text" asp-for="CVV"/>
+
+                    <div class="form_group" style="width: 50%;">
+                        <label class="main-text"  asp-for="CVV"> CVV </label>
+                        <input class="form_input" placeholder=" " type="text" asp-for="CVV" />
                     </div>
-                    
+
                     <div class="form_group">
                         <label class="main-text" asp-for="Amount"> Amount </label>
-                        <input class="form_input" placeholder=" " type="text" asp-for="Amount"/>
+                        <input class="form_input amount" placeholder="0" type="number" asp-for="Amount" />
+                        $
                     </div>
-                   
+
                     <dl></dl>
-                        
-                    <div>
-                        <button class="nav-button"> Enter </button>
+
+                    <div class="submit">
+                        <input type="submit" value="Enter" id="form_button" />
                     </div>
-                    
-                </form><!-- // End form -->
-            </div><!-- // End #container -->
-        </div>
-    </div>
-</div>
-<div class="cards">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3 cards">
-                <img class="cards-img" src="/img/cards.png" alt="cards">
+                </form>
             </div>
+        </div>
+        <div class="col-md-1 offset-md-1">
+            <img class="ellipse-2" src="/img/ellipse2.png" alt="ellipse">
         </div>
     </div>
 </div>

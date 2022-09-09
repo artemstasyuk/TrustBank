@@ -1,7 +1,4 @@
-﻿using BankApplication.Models;
-using Microsoft.EntityFrameworkCore.Metadata;
-
-namespace BankApplication.DbContexts;
+﻿namespace BankApplication.DbContexts;
 
 public class AppDbContext : DbContext
 {
@@ -12,7 +9,8 @@ public class AppDbContext : DbContext
     public DbSet<Operation> Operations { get; set; }
     public DbSet<Profile> UsersProfiles { get; set; }
     public DbSet<CardSample> CardSamples { get; set; }
-    
+    public DbSet<AvatarModel> Files { get; set; }
+
     public DbSet<Feature> Features { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

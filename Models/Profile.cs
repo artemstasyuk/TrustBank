@@ -18,16 +18,15 @@ public class Profile
     
     [ForeignKey("User")]
     public int UserId { get; set; }
-    
-    
-    
+
+    [ForeignKey("AvatarModel")]
+    public int? AvatarModelId { get; set; }
+
     [DataType(DataType.EmailAddress)]
     public string Email { get; set; }
-    
-    
+        
     [StringLength(20)]
     public string Name { get; set; }
-
     
     [StringLength(20)]
     public string Surname { get; set; }
@@ -39,4 +38,6 @@ public class Profile
     public bool IsVerified { get; set; } = false;
     
     public User User { get; set; }
+
+    public AvatarModel AvatarModel { get; set; }
 }

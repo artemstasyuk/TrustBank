@@ -3,8 +3,6 @@ using System.Text;
 
 namespace BankApplication.Data.Repositories;
 
-
-
 public class ProfileRepository : IProfileRepository
 {
     private readonly AppDbContext _dbContext;
@@ -17,7 +15,7 @@ public class ProfileRepository : IProfileRepository
         await _dbContext.UsersProfiles.FindAsync(new object[] {id});
     
     public async Task<Profile> GetProfileByUserIdAsync(int userid) =>
-        await _dbContext.UsersProfiles.FindAsync(new object[] {userid});
+        await _dbContext.UsersProfiles.Include(user => user.AvatarModel).FirstOrDefaultAsync(user => user.UserId == userid);
 
     public async Task<Profile> GetProfileByPhoneNumber(string phoneNumber) =>
         await _dbContext.UsersProfiles.FindAsync(new object[] {phoneNumber});
@@ -61,8 +59,19 @@ public class ProfileRepository : IProfileRepository
     public async Task SaveAsync() => 
         await _dbContext.SaveChangesAsync();
 
+    public async Task EditProfileAsync(int profileId, ProfileViewModel profileModel, AvatarModel avatar)
+    {
+        var profile = await _dbContext.UsersProfiles.FindAsync(new object[] { profileId });
+        
+        profile.Name = profileModel.Profile.Name;
+        profile.Surname = profileModel.Profile.Surname;
+        if (avatar.Id != 0)
+            profile.AvatarModel = avatar; 
+        await SaveAsync();
+    }
+
     #region Helpers
-    
+
     public string GetHash(string data)
     {
         MD5 md5 = MD5.Create();
@@ -75,7 +84,6 @@ public class ProfileRepository : IProfileRepository
             sb.Append(hash[i].ToString("X2"));
         }
         return sb.ToString();
-    }
-
+    }   
     #endregion
 }

@@ -9,5 +9,6 @@ public interface IProfileRepository
     Task CreateProfile(User user);
     Task ReturnProfileAsync(int profileId);
     Task DeleteProfileAsync(int profileId);
+    Task EditProfileAsync(int profileId, ProfileViewModel profileModel, AvatarModel avatar);
     Task<Profile> GetProfileByUserIdAsync(int userid);
 }
