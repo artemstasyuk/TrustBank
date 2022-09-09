@@ -19,7 +19,7 @@ public class OperationRepository : IOperationRepository
         await _dbContext.Operations.FindAsync(new object[] {id});
 
     public async Task<List<Operation>> GetAllOperations(int cardId) => 
-        await _dbContext.Operations.Where(op => op.CardFromId.Equals(cardId) || op.CardToId.Equals(cardId)).ToListAsync();
+        await _dbContext.Operations.Include(card => card.CardFrom).Include(card => card.CardTo).Where(op => op.CardFromId.Equals(cardId) || op.CardToId.Equals(cardId)).ToListAsync();
     public async Task SaveAsync() => 
         await _dbContext.SaveChangesAsync();
 }

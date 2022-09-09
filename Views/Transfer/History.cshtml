@@ -3,52 +3,92 @@
 
 @foreach (var item in Model.Operations)
 {
-    <div class="card-item">
-        <a class="card-item-type"><img width="25" class="me-2" src="/img/shopping-cart.png"/><b>Debit</b></a>
-        <div class="row mt-5">
-            <div class="col-6">
-                <div class="row mt-4">
-                    @switch (item.CardOperationType)
-                    {
-                        case CardOperationType.Transfer:
-                            if (item.CardToId == Model.CardId)
-                            {
-                                ViewData["amount"] = "+";
-                                <h1>Replenishment</h1>
-                            }
-                            if(item.CardFromId == Model.CardId)
-                            {
-                                ViewData["amount"] = "-";
-                                <h1>Debiting</h1>
-                            }
-                            break;
-                            
-                        case CardOperationType.Replenish:
-                            if (item.CardFromId == Model.CardId)
-                            {
-                                ViewData["amount"] = "-";
-                                <h1>Debiting</h1>
-                            }
-                            if(item.CardToId == Model.CardId)
-                            {
-                                ViewData["amount"] = "+";
-                                <h1>Replenishment</h1>
-                            }
-                            break;
-                    }
-                    <div class="col-3">
-                        <b class="card-item-text">@item.Id</b>
+    <div class="container mt-5">
+        <div class="">
+            <div class="row mt-5">
+                <div class="col-6" style="border-bottom: 2px solid gray;">
+                    <div class="row mt-4">
+                        @switch (item.CardOperationType)
+                        {
+                            case CardOperationType.Transfer:
+                                if (item.CardToId == Model.CardId)
+                                {
+                                    ViewData["amount"] = "+";
+                                    <h5>Transfer from user</h5>
+                                    <p style="color:gray;">Transfer</p>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <p><b class="card-item-text">from:</b> @item.CardFrom.CardName @item.CardFrom.CardSurname</p>
+                                        </div>
+                                        <div class="col-4">
+                                            <p><b class="card-item-text">card</b> @item.RecipientСardNumber</p>
+                                        </div>
+                                        <div class="col-2">
+                                            <p><b class="card-item-text">@ViewData["amount"]</b> <b>@item.Amount$</b></p>
+                                        </div>
+                                    </div>                                                                                                      
+                                }
+                                if (item.CardFromId == Model.CardId)
+                                {
+                                    ViewData["amount"] = "-";
+                                    <h5>Transfer to user</h5>
+                                    <p style="color:gray;">Transfer</p>
+
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <p><b class="card-item-text">to:</b> @item.CardTo.CardName @item.CardTo.CardSurname</p>
+                                        </div>
+                                        <div class="col-4">
+                                            <p><b class="card-item-text">card</b> @item.RecipientСardNumber</p>
+                                        </div>
+                                        <div class="col-2">
+                                            <p><b class="card-item-text">@ViewData["amount"]</b> <b>@item.Amount$</b></p>
+                                        </div>
+                                    </div>
+                                }
+                                break;
+
+                            case CardOperationType.Replenish:
+                                if (item.CardFromId == Model.CardId)
+                                {
+                                    ViewData["amount"] = "-";
+                                    <h5>Write-off from the card</h5>
+                                    <p style="color:gray;">Withdrawal</p>
+
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <p><b class="card-item-text">to:</b> @item.CardFrom.CardName @item.CardFrom.CardSurname</p>
+                                        </div>
+                                        <div class="col-4">
+                                            <p><b class="card-item-text">card</b> @item.RecipientСardNumber</p>
+                                        </div>
+                                        <div class="col-2">
+                                            <p><b class="card-item-text">@ViewData["amount"]</b> <b>@item.Amount$</b></p>
+                                        </div>
+                                    </div>
+                                }
+                                if (item.CardToId == Model.CardId)
+                                {
+                                    ViewData["amount"] = "+";
+                                    <h5>Card replenishment</h5>
+                                    <p style="color:gray;">Replenishment</p>
+
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <p><b class="card-item-text">from:</b> @item.CardFrom.CardName @item.CardFrom.CardSurname</p>
+                                        </div>
+                                        <div class="col-4">
+                                            <p><b class="card-item-text">card</b> @item.RecipientСardNumber</p>
+                                        </div>
+                                        <div class="col-2">
+                                            <p><b class="card-item-text">@ViewData["amount"]</b> <b>@item.Amount$</b></p>
+                                        </div>
+                                    </div>
+                                }
+                                break;
+                        }                                              
                     </div>
-                    <div class="col-3 offset-1">
-                        <b class="card-item-text">@item.RecipientСardNumber</b>
-                    </div>
-                    <div class="col-3 offset-1">
-                        <b class="card-item-text">@ViewData["amount"] @item.Amount</b>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3 offset-2">
-                <img width=330 src="/img/bank-card.png"/>
+                </div>                
             </div>
         </div>
     </div>
