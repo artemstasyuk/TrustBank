@@ -11,8 +11,6 @@ public class User
     
     public string Surname { get; set; }
     
-    [StringLength(6)]
-    [DataType(DataType.Password)]
     public string Password { get; set; }
 
     public string Email { get; set; }

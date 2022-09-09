@@ -1,5 +1,7 @@
 using System.Text;
-using BankApplication.Infrastructure.AuthService;
+using BankApplication.Infrastructure.AuthService.EmailService;
+using BankApplication.Infrastructure.AuthService.JwtTokenService;
+using BankApplication.Infrastructure.AuthService.SmsService;
 using BankApplication.Infrastructure.ImageService;
 using BankApplication.Infrastructure.TransferService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

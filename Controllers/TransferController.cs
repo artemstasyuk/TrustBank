@@ -16,10 +16,6 @@ public class TransferController : Controller
         _cardRepository = cardRepository;
         _transferService = transferService;
     }
-
-    [HttpGet]
-    public async Task<ActionResult> Index(int id) => 
-        View(await _cardRepository.GetCardByIdAsync(id));
     
 
     [HttpGet]

@@ -1,6 +1,8 @@
-﻿using BankApplication.Infrastructure.AuthService;
+﻿
+using BankApplication.Infrastructure.AuthService.EmailService;
+using BankApplication.Infrastructure.AuthService.JwtTokenService;
 
-namespace BankApplication.Controllers.AccountControllers;
+namespace BankApplication.Controllers;
 
 public class AuthController : Controller
 {

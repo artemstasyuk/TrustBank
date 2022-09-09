@@ -2,7 +2,7 @@
 using Twilio.Rest.Chat.V1.Service.Channel;
 using Twilio.Types;
 
-namespace BankApplication.Infrastructure.AuthService;
+namespace BankApplication.Infrastructure.AuthService.SmsService;
 
 public class SmsService : ISmsService
 {

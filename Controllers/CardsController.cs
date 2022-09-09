@@ -1,7 +1,6 @@
 ﻿using System.Security.Claims;
-using BankApplication.Infrastructure.AuthService;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+using BankApplication.Infrastructure.AuthService.EmailService;
+
 
 namespace BankApplication.Controllers
 {       
