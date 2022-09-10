@@ -5,7 +5,7 @@ public interface IProfileRepository
     Task<Profile> GetProfileByIdAsync(int id);
     Task<Profile> GetProfileByPhoneNumber(string phoneNumber);
     Task<Profile> GetProfileByEmail(string email);
-    Task VerifyEmail(Profile profile);
+    Task VerifyEmail(User user);
     Task CreateProfile(User user);
     Task ReturnProfileAsync(int profileId);
     Task DeleteProfileAsync(int profileId);

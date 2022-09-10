@@ -1,6 +1,5 @@
 ﻿using BankApplication.Extensions;
 using BankApplication.Infrastructure.TransferService;
-using Twilio.Rest.Api.V2010;
 
 namespace BankApplication.Controllers;
 

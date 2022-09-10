@@ -34,8 +34,6 @@ public class Profile
     public List<Card> Cards { get; set; } = new();
     
     public ProfileStatus Status { get; set; }
-
-    public bool IsVerified { get; set; } = false;
     
     public User User { get; set; }
 

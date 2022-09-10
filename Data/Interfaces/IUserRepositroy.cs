@@ -6,5 +6,6 @@ public interface IUserRepository
     Task<User> GetUserByIdAsync(int id);
     Task CreateUser(User user);
     Task<bool> UserExist(string email);
-    bool CheckPassword(string passwordLogin, User user );
+    Task<bool> CheckUserCredentials(string email, string password);
+
 }

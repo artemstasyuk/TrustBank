@@ -1,27 +1,18 @@
 ﻿
 using BankApplication.Infrastructure.AuthService.EmailService;
 using BankApplication.Infrastructure.AuthService.JwtTokenService;
+using BankApplication.Infrastructure.AuthService.UserControlService;
 
 namespace BankApplication.Controllers;
 
 public class AuthController : Controller
 {
-    private readonly IProfileRepository _profileRepository;
-    private readonly IUserRepository _userRepository;
-    private readonly EmailTokenDto _emailToken;
-    private readonly ITokenService _tokenService;
-    private readonly IEmailService _emailService;
+    private readonly IUserControlService _userControlService;
 
-    public AuthController(EmailTokenDto emailToken,
-        IProfileRepository profileRepository, 
-        IUserRepository userRepository,
-        ITokenService tokenService, IEmailService emailService)
+    public AuthController(IUserControlService userControlService)
     {
-        _emailToken = emailToken;
-        _emailService = emailService;
-        _tokenService = tokenService;
-        _profileRepository = profileRepository;
-        _userRepository = userRepository;
+        _userControlService = userControlService;
+       
     }
     
     [HttpGet]
@@ -32,14 +23,10 @@ public class AuthController : Controller
     public async Task<ActionResult> Login(LoginViewModel viewModel)
     {
         if (!ModelState.IsValid) return View(viewModel);
+        var authDto = await _userControlService.Login(viewModel);
+        if (authDto.Status == false) return View();
         
-        var user = await _userRepository.GetUserByEmailAsync(viewModel.Email);
-        if (user is null) return BadRequest(new {messege = "Not exist"});
-        
-        if (!_userRepository.CheckPassword(viewModel.Password, user)) return BadRequest(new {messege = "Password isn't correct"});
-
-        Authorize(_tokenService.CreateToken(user));
-
+        Authorize(authDto.Token);
         return RedirectToAction("Index", "Home");
     }
 
@@ -52,21 +39,8 @@ public class AuthController : Controller
     public async Task<ActionResult> Registration(RegistrationViewModel viewModel)
     {
         if (!ModelState.IsValid) return View();
-        if (await _userRepository.UserExist(viewModel.Email)) return BadRequest(new {messege = "Invalid Credentials"});
-
-        var user = new User()
-        {
-            Email = viewModel.Email,
-            Password = viewModel.Password,
-            Name = viewModel.AccountName,
-            Surname = viewModel.AccountSurname,
-        };
-        await _userRepository.CreateUser(user);
-
-        await _profileRepository.CreateProfile(user);
-
-        var emailTokenDto = _emailService.SendEmailCode(viewModel.Email, GenerateEmailCode(), "Verify your email"); 
-        _emailToken.SetEmailToken(emailTokenDto);
+        var authDto = await _userControlService.Registration(viewModel);
+        if (authDto.Status == false) return View();
         
         return RedirectToAction("VerifyEmailToken");
     }
@@ -79,13 +53,10 @@ public class AuthController : Controller
     [HttpPost]
     public async Task<ActionResult> VerifyEmailToken(EmailViewModel emailDto)
     {
-        var user = await _userRepository.GetUserByEmailAsync(_emailToken.Email);
-        if (emailDto.EmailCode != _emailToken.EmailCode) return BadRequest(new {messege = "Code is not right"});
-
-        var profile = await _profileRepository.GetProfileByUserIdAsync(user.Id);
-        await _profileRepository.VerifyEmail(profile);
-        Authorize(_tokenService.CreateToken(user));
+        var authDto = await _userControlService.VerifyEmailToken(emailDto);
+        if (authDto.Status == false) return View();// ошибка
             
+        Authorize(authDto.Token);
         return RedirectToAction("Index", "Home");
     }
     
@@ -95,8 +66,7 @@ public class AuthController : Controller
         Response.Cookies.Delete("jwt");
         return RedirectToAction("Index", "Home");
     }
-
-    #region Helpers
+    
     
     public void Authorize(string token)
     {
@@ -105,12 +75,5 @@ public class AuthController : Controller
             HttpOnly = true
         });
     }
-    public string GenerateEmailCode()
-    {
-        int _min = 000000;
-        int _max = 999999;
-        Random _rdm = new Random();
-        return _rdm.Next(_min, _max).ToString();
-    }
-    #endregion
+    
 }

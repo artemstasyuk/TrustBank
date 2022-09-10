@@ -23,9 +23,11 @@ public class ProfileRepository : IProfileRepository
     public async Task<Profile> GetProfileByEmail(string email) => 
          await _dbContext.UsersProfiles.Where(p => p.Email == email).FirstOrDefaultAsync();
     
-    public async Task VerifyEmail(Profile profile)
+    public async Task VerifyEmail(User user)
     {
-        profile.IsVerified = true;
+        user.IsVerified = true;
+        var profile = await GetProfileByUserIdAsync(user.Id);
+        profile.Status = ProfileStatus.Active;
         await SaveAsync();
     }
 
@@ -37,8 +39,7 @@ public class ProfileRepository : IProfileRepository
             Name = user.Name,
             Surname = user.Surname,
             Email = user.Email,
-            IsVerified = false,
-            Status = ProfileStatus.Active
+            Status = ProfileStatus.Deleted
         });
         await SaveAsync();
     }

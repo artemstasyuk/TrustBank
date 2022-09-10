@@ -7,11 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
       <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.8" />
       <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.8" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.0-preview.7" />
       <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.22.1" />
-      <PackageReference Include="Twilio" Version="5.79.0" />
     </ItemGroup>
 
     <ItemGroup>
