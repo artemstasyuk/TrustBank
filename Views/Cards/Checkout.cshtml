@@ -43,9 +43,18 @@
                         <input type="text" placeholder="My adress" asp-for="@Model.Adress" id="name_input" required>
                     </div>
                     
-                    <div class="submit">
-                        <input type="submit" value="Checkout" id="form_button" />
-                    </div>
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <div class="submit">
+                             <a asp-action="Login" asp-controller="Auth" id="form_button">Checkout</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="submit">
+                            <input type="submit" value="Checkout" id="form_button"/>
+                        </div>
+                    }
                 </form><!-- // End form -->
             </div><!-- // End #container -->
         </div>

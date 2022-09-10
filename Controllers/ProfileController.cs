@@ -14,13 +14,16 @@ public class ProfileController : Controller
     {
         _profileService = profileService;
     }
+    [Authorize]
     public async Task<IActionResult> Index()
     {
         var userId = int.Parse(User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value);
         return View(await _profileService.GetProfile(userId));
     }
  
+   
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> EditProfile(ProfileViewModel viewModel)
     {
         var userId = int.Parse(User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value);

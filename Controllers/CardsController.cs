@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using BankApplication.Infrastructure.AuthService.EmailService;
 using BankApplication.Infrastructure.CardService;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace BankApplication.Controllers
@@ -15,7 +16,6 @@ namespace BankApplication.Controllers
             _cardService = cardService;
             _cardSampleRepository = cardSampleRepository;
         }
-        
         public async Task<IActionResult> Index(string type)
         {
             List<CardSample> samples;

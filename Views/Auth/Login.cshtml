@@ -24,10 +24,11 @@
                         <input type="password" class="form_input password_input" asp-for="Password" />
                         <span class="input-validation-error" asp-validation-for="Password" />
                     </div>
-                                            
+                                           
+                    <div class="text-danger" asp-validation-summary="All"></div>
                     <div class="submit">
                         <input type="submit" value="LOGIN" id="form_button" />
-                    </div>                                        
+                    </div>
                 </form><!-- // End form -->
                 <a class="nav-item" style="padding:0; margin-left: 35px;" asp-controller="Auth" asp-action="Registration"> Don't have an account?  </a>
                 <dl></dl>

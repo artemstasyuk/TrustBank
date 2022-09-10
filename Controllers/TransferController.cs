@@ -1,5 +1,6 @@
 ﻿using BankApplication.Extensions;
 using BankApplication.Infrastructure.TransferService;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BankApplication.Controllers;
 
@@ -16,11 +17,13 @@ public class TransferController : Controller
         _transferService = transferService;
     }
     
-
+    
     [HttpGet]
+    [Authorize]
     public ActionResult Transfer() => View();
     
     [HttpPost]
+    [Authorize]
     public async Task<ActionResult> Transfer(int id , TransferOperationViewModel viewModel)
     {
         if (ModelState.IsValid)
@@ -33,6 +36,7 @@ public class TransferController : Controller
     }
 
     [HttpGet]
+    [Authorize]
     public ActionResult Replenish() => View();
 
     public async Task<ActionResult> Replenish(int id, ReplenishOperationViewModel viewModel)
@@ -46,12 +50,12 @@ public class TransferController : Controller
 
         return View();
     }
-
-
+    
     public ActionResult Receipt(Operation operation) => 
         View(operation);
     
 
+    [Authorize]
     public async Task<ActionResult> History(int id) => 
         View(new HistoryViewModel(){CardId = id, Operations = await _operationRepository.GetAllOperations(id)});
     
