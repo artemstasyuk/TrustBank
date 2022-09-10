@@ -1,7 +1,5 @@
 ﻿using System.Security.Claims;
-using BankApplication.Infrastructure.AuthService.EmailService;
 using BankApplication.Infrastructure.CardService;
-using Microsoft.AspNetCore.Authorization;
 
 
 namespace BankApplication.Controllers

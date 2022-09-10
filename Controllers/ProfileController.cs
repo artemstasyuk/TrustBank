@@ -1,5 +1,4 @@
 ﻿using System.Security.Claims;
-using BankApplication.Infrastructure.ImageService;
 using BankApplication.Infrastructure.ProfileService;
 using Microsoft.AspNetCore.Authorization;
 

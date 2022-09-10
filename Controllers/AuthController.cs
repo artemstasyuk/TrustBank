@@ -1,7 +1,4 @@
-﻿
-using BankApplication.Infrastructure.AuthService.EmailService;
-using BankApplication.Infrastructure.AuthService.JwtTokenService;
-using BankApplication.Infrastructure.AuthService.UserControlService;
+﻿using BankApplication.Infrastructure.AuthService.UserControlService;
 
 namespace BankApplication.Controllers;
 
@@ -24,11 +21,11 @@ public class AuthController : Controller
     {
         if (!ModelState.IsValid) return View(viewModel);
         var authDto = await _userControlService.Login(viewModel);
-        if (authDto.Status == false)
+        if (authDto.Status != true)
         {
             ModelState.AddModelError("", authDto.Error);
             return View();
-        } // ошибка
+        } 
 
         Authorize(authDto.Token);
         return RedirectToAction("Index", "Home");
@@ -44,11 +41,11 @@ public class AuthController : Controller
     {
         if (!ModelState.IsValid) return View();
         var authDto = await _userControlService.Registration(viewModel);
-        if (authDto.Status == false)
+        if (authDto.Status != true)
         {
             ModelState.AddModelError("", authDto.Error);
             return View();
-        } // ошибка
+        } 
 
         return RedirectToAction("VerifyEmailToken");
     }
@@ -62,7 +59,7 @@ public class AuthController : Controller
     public async Task<ActionResult> VerifyEmailToken(EmailViewModel emailDto)
     {
         var authDto = await _userControlService.VerifyEmailToken(emailDto);
-        if (authDto.Status == false)
+        if (authDto.Status != true)
         {
             ModelState.AddModelError("", authDto.Error);
             return View();

@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace BankApplication.Models;
 
 public enum CardOperationType{
-    None,
     Transfer,
     Replenish
 }

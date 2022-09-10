@@ -1,8 +1,4 @@
-﻿using System.Globalization;
-using BankApplication.Controllers;
-using BankApplication.Infrastructure.TransferService;
-using Microsoft.AspNetCore.Server.IIS;
-
+﻿
 namespace BankApplication.Data.Repositories;
 
 public class UserRepository : IUserRepository

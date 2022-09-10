@@ -1,5 +1,4 @@
-﻿using BankApplication.Extensions;
-using BankApplication.Infrastructure.TransferService;
+﻿using BankApplication.Infrastructure.TransferService;
 using Microsoft.AspNetCore.Authorization;
 
 namespace BankApplication.Controllers;
@@ -7,13 +6,11 @@ namespace BankApplication.Controllers;
 public class TransferController : Controller
 {
     private readonly ITransferService _transferService;
-    private readonly ICardRepository _cardRepository;
     private readonly IOperationRepository _operationRepository;
 
     public TransferController(ITransferService transferService, ICardRepository cardRepository, IOperationRepository operationRepository)
     {
         _operationRepository = operationRepository;
-        _cardRepository = cardRepository;
         _transferService = transferService;
     }
     
@@ -28,8 +25,13 @@ public class TransferController : Controller
     {
         if (ModelState.IsValid)
         { 
-            var operation = await _transferService.TransferByCardNumber(id, viewModel.RecipientСardNumber, viewModel.Amount, CardOperationType.Transfer);
-            return RedirectToAction("Receipt", operation);
+            var operationDto = await _transferService.TransferByCardNumber(id, viewModel.RecipientСardNumber, viewModel.Amount, CardOperationType.Transfer);
+            if (operationDto.Status != true)
+            {
+                ModelState.AddModelError("", $"{operationDto.Error}");
+                return View();
+            }
+            return RedirectToAction("Receipt", operationDto.Operation);
         }
 
         return View();
@@ -43,9 +45,14 @@ public class TransferController : Controller
     {
         if (ModelState.IsValid)
         {
-            var operation = await _transferService.ReplenishByCardNumber(id, viewModel.CardNumber, viewModel.Amount,
+            var operationDto = await _transferService.ReplenishByCardNumber(id, viewModel.CardNumber, viewModel.Amount,
                 viewModel.CVV, viewModel.Validity, CardOperationType.Replenish);
-            return RedirectToAction("Receipt", operation);
+            if (operationDto.Status != true)
+            {
+                ModelState.AddModelError("", $"{operationDto.Error}");
+                return View();
+            }
+            return RedirectToAction("Receipt", operationDto.Operation);
         }
 
         return View();

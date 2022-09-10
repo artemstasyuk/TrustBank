@@ -2,7 +2,7 @@
 
 public interface IUserControlService
 {
-    Task<AuthDto> Login(LoginViewModel viewModel);
-    Task<AuthDto> Registration(RegistrationViewModel viewModel);
-    Task<AuthDto> VerifyEmailToken(EmailViewModel emailDto);
+    Task<AuthErrorDto> Login(LoginViewModel viewModel);
+    Task<AuthErrorDto> Registration(RegistrationViewModel viewModel);
+    Task<AuthErrorDto> VerifyEmailToken(EmailViewModel emailDto);
 }

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace BankApplication.Infrastructure.Sessions;
+namespace BankApplication.Extensions;
 
 public static class SessionExtensions
 {

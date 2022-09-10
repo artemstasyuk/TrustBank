@@ -1,4 +1,6 @@
-﻿namespace BankApplication.Infrastructure.TransferService;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+
+namespace BankApplication.Infrastructure.TransferService;
 
 public class TransferService : ITransferService
 {
@@ -11,54 +13,72 @@ public class TransferService : ITransferService
         _cardRepository = cardRepository;
     }
     
-    public async Task<Operation> TransferByCardNumber(int cardFromId, string cardNumber, decimal amount, CardOperationType type)
+    public async Task<OperationErrorDto> TransferByCardNumber(int cardFromId, string cardNumber, decimal amount, CardOperationType type)
     {
         var cardToDb = await GetCard(cardNumber);
-        Card cardFromDb = await _cardRepository.GetCardByIdAsync(cardFromId);
-        
-        Operation operation = new()
+        if (cardToDb is not null)
         {
-            CardOperationType = type,
-            RecipientСardNumber = cardNumber,
-            CardFromId = cardFromDb.Id,
-            CardToId = cardToDb.Id,
-            Amount = amount, 
-            IsCompleted = await IsSufficientBalance(cardFromDb, cardToDb, amount)
-        };
-        
-        await _operationRepository.CreateOperation(operation);
-        return operation;
+            Card cardFromDb = await _cardRepository.GetCardByIdAsync(cardFromId);
+            if (await IsSufficientBalance(cardFromDb, cardToDb, amount))
+            {
+
+                Operation operation = new()
+                {
+                    CardOperationType = type,
+                    RecipientСardNumber = cardNumber,
+                    CardFromId = cardFromDb.Id,
+                    CardToId = cardToDb.Id,
+                    Amount = amount,
+                    IsCompleted = true
+                };
+
+                await _operationRepository.CreateOperation(operation);
+
+                return new OperationErrorDto() {Operation = operation, Status = true};
+            }
+
+            return new OperationErrorDto(){Error = "The balance is less than the payment amount"};
+        }
+        return new OperationErrorDto(){Error = "Card doesn't exist"};
     } 
-    public async Task<Operation> ReplenishByCardNumber(int cardTo, string cardNumber, decimal amount, string cvv, string validity, CardOperationType type)
+    
+    
+    public async Task<OperationErrorDto> ReplenishByCardNumber(int cardTo, string cardNumber, decimal amount, string cvv, string validity, CardOperationType type)
     {
         var cardFromDb = await GetCard(cardNumber);
-        if (CheckCardCredentials(cvv, validity, cardFromDb))
+        if (cardFromDb is not  null)
         {
-
-            Card cardToDb = await _cardRepository.GetCardByIdAsync(cardTo);
-
-            Operation operation = new()
+            if (CheckCardCredentials(cvv, validity, cardFromDb))
             {
-                CardOperationType = type,
-                RecipientСardNumber = cardNumber,
-                CardFromId = cardFromDb.Id,
-                CardToId = cardToDb.Id,
-                Amount = amount,
-                IsCompleted = await IsSufficientBalance(cardFromDb, cardToDb, amount)
-            };
+                Card cardToDb = await _cardRepository.GetCardByIdAsync(cardTo);
+                
+                if (await IsSufficientBalance(cardFromDb, cardToDb, amount))
+                {
+                    Operation operation = new()
+                    {
+                        CardOperationType = type,
+                        RecipientСardNumber = cardNumber,
+                        CardFromId = cardFromDb.Id,
+                        CardToId = cardToDb.Id,
+                        Amount = amount,
+                        IsCompleted = true
+                    };
 
-            await _operationRepository.CreateOperation(operation);
-            return operation;
+                    await _operationRepository.CreateOperation(operation);
+                    return new OperationErrorDto() {Operation = operation, Status = true};
+                    
+                }
+                return new OperationErrorDto(){Error = "The balance is less \nthan the payment amount"};
+            }
+            return new OperationErrorDto(){Error = "Invalid card credentials"};
         }
-
-        throw new BadHttpRequestException("Invalid card credentials");
+        return new OperationErrorDto(){Error = "Card doesn't exist"};
     }
 
     private async Task<Card> GetCard(string cardNumber)
     {
         var card = await _cardRepository.GetCardByCardNumberAsync(cardNumber);
-        if (card is null) throw new BadHttpRequestException("Card doesn't exist");
-        return card;
+        return card; 
     }
 
     private bool CheckCardCredentials(string cvv, string validity, Card card) =>

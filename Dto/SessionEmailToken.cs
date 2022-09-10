@@ -1,4 +1,4 @@
-﻿using BankApplication.Infrastructure.Sessions;
+﻿using BankApplication.Extensions;
 using Newtonsoft.Json;
 
 namespace BankApplication.Dto;

@@ -33,14 +33,13 @@ a{
         color: #FDCF49;
         cursor: pointer;
     }
-
+    
 .nav-button {
     color: white;
     border: 2px solid #3A3949;
     padding: 10px 15px;
     border-radius: 3px;
     position: relative;
-    color: white;    
     overflow: hidden;
     transition: 1s all ease;
 }
@@ -599,4 +598,16 @@ label{
     font-weight: bold;
     font-size: 20px;
     margin-left: 15px;
+}
+
+.error_container{
+    position: absolute;
+    font-size: 20px;
+    right: 35px;
+}
+
+.error_container_registration{
+    position: absolute;
+    font-size: 20px;
+    right: 60px;
 }

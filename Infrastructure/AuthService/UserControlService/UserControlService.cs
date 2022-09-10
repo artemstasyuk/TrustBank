@@ -21,60 +21,76 @@ public class UserControlService : IUserControlService
         _userRepository = userRepository;
     }
 
-    public async Task<AuthDto> Login(LoginViewModel viewModel)
+    /// <summary>
+    /// Login action
+    /// </summary>
+    /// <param name="viewModel">contains user's params</param>
+    /// <returns>Auth dto with Error message or Jwt token</returns>
+    public async Task<AuthErrorDto> Login(LoginViewModel viewModel)
     {
-        AuthDto dto = new ();
-        if (!await _userRepository.CheckUserCredentials(viewModel.Email, viewModel.Password))
+        AuthErrorDto dto = new ();
+        if (await _userRepository.CheckUserCredentials(viewModel.Email, viewModel.Password))
         {
-            dto.Error = "Incorrect login or password";
-            dto.Status = false;
+            dto.Status = true;
+            dto.Token = _tokenService.CreateToken(await _userRepository.GetUserByEmailAsync(viewModel.Email));
             return dto;
         }
+        dto.Error = "Incorrect login or password";
+        return dto; 
 
-        dto.Token = _tokenService.CreateToken(await _userRepository.GetUserByEmailAsync(viewModel.Email));
-        return dto;
+       
     }
 
-    public async Task<AuthDto> Registration(RegistrationViewModel viewModel)
+    /// <summary>
+    /// Registration action
+    /// </summary>
+    /// <param name="viewModel">contain user's params</param>
+    /// <returns>Auth dto with only Error message </returns>
+    public async Task<AuthErrorDto> Registration(RegistrationViewModel viewModel)
     {
-        AuthDto dto = new();
-        if (!await _userRepository.UserExist(viewModel.Email))
+        AuthErrorDto dto = new();
+        if (await _userRepository.UserExist(viewModel.Email))
         {
-            dto.Error = "User exist";
-            dto.Status = false;
+            var user = new User()
+            {
+                Email = viewModel.Email,
+                Password = viewModel.Password,
+                Name = viewModel.AccountName,
+                Surname = viewModel.AccountSurname,
+            };
+        
+            await _userRepository.CreateUser(user);
+
+            await _profileRepository.CreateProfile(user);
+
+            var emailTokenDto = _emailService.SendEmailCode(viewModel.Email, $"This is your code {GenerateEmailCode()}", "Verify your email"); 
+        
+            _emailToken.SetEmailToken(emailTokenDto);
+
+            dto.Status = true;
             return dto;
         }
-
-        var user = new User()
-        {
-            Email = viewModel.Email,
-            Password = viewModel.Password,
-            Name = viewModel.AccountName,
-            Surname = viewModel.AccountSurname,
-        };
-        
-        await _userRepository.CreateUser(user);
-
-        await _profileRepository.CreateProfile(user);
-
-        var emailTokenDto = _emailService.SendEmailCode(viewModel.Email, GenerateEmailCode(), "Verify your email"); 
-        
-        _emailToken.SetEmailToken(emailTokenDto);
-
+        dto.Error = "User exist";
         return dto;
     }
-    public async Task<AuthDto> VerifyEmailToken(EmailViewModel emailDto)
+    
+    /// <summary>
+    /// Email verify action
+    /// </summary>
+    /// <param name="emailDto">contain email code</param>
+    /// <returns>Auth dto with Error message or Jwt token</returns>
+    public async Task<AuthErrorDto> VerifyEmailToken(EmailViewModel emailDto)
     {
-        AuthDto dto = new();
+        AuthErrorDto dto = new();
         var user = await _userRepository.GetUserByEmailAsync(_emailToken.Email);
         if (emailDto.EmailCode != _emailToken.EmailCode)
         {
             dto.Error = "Code isn't right";
-            dto.Status = false;
             return dto;
         }
         
         await _profileRepository.VerifyEmail(user);
+        dto.Status = true;
         dto.Token = _tokenService.CreateToken(user);
         return dto;
     }
