@@ -1,36 +1,31 @@
-﻿using System.ComponentModel;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace BankApplication.ViewModels;
 
 public class RegistrationViewModel
 {
-
-    [Display(Name = "Password")]
-    [StringLength(6)]
+    [Required(ErrorMessage = "Enter a password")]
     [DataType(DataType.Password)]
-    [Required(ErrorMessage = "Name must match the format")]
+    [StringLength(6, ErrorMessage = "Password consists of 6 characters", MinimumLength = 6)]
     public string Password { get; set; }
-    
-    [Display(Name = "Email")]
-    [DataType(DataType.EmailAddress)]
-    [Required(ErrorMessage = "Name must match the format")]
+
+
+    [EmailAddress(ErrorMessage = "Email must match the format")]
+    [Required(ErrorMessage = "Enter your email")]
     public string Email { get; set; }
     
     
-    [StringLength(20)]
-    [Required(ErrorMessage = "Name must match the format")]
+    [StringLength(30, ErrorMessage = "Name must match the format")]
+    [Required(ErrorMessage = "Enter your name")]
     public string AccountName { get; set; }
 
     
-    [StringLength(20)]
-    [Required(ErrorMessage = "Surname must match the format")] 
+    [StringLength(50, ErrorMessage = "Surname must match the format")]
+    [Required(ErrorMessage = "Enter your surname")] 
     public string AccountSurname { get; set; }
-    
-    [DataType(DataType.Password)]
-    [StringLength(6)]
+
+    [Required]
+    [DataType(DataType.Password)]   
     [Compare("Password", ErrorMessage = "Password entered incorrectly")]
     public string ConfirmPassword { get; set; }
 }
