@@ -18,18 +18,18 @@
                 <div class="col-10 offset-1">
                     <h3 class="text-center" style="color: white;">EDIT PROFILE</h3>
                     <form asp-action="EditProfile" asp-controller="Profile" method="post" enctype="multipart/form-data">
-                        <div class="form_group">
+                        <div class="form-group">
                             <label class="main-text" asp-for="Profile.Name">Name</label><br />
                             <input class="form_input" type="text" asp-for="Profile.Name" />
                             <span class="input-validation-error" asp-validation-for="Profile.Name" />
                         </div>
-                        <div class="form_group">
+                        <div class="form-group">
                             <label class="main-text" asp-for="Profile.Surname">Surname</label><br />
                             <input class="form_input" type="text" asp-for="Profile.Surname" />
                             <span class="input-validation-error" asp-validation-for="Profile.Surname" />
                         </div>
 
-                        <div class="form_group">
+                        <div class="form-group">
                             <label class="main-text">Change profile photo</label><br />
                             <input type="file" asp-for="PhotoProfile" /><br>
                         </div>

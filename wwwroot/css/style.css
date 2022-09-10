@@ -607,7 +607,7 @@ label{
 }
 
 .error_container_registration{
-    position: absolute;
+    position: relative;
     font-size: 20px;
     right: 60px;
 }

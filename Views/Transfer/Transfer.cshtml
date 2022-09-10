@@ -14,11 +14,11 @@
                 <div class="underline">
                 </div>
                 <form class="form" asp-action="Transfer" asp-anti-forgery="true">
-                    <div class="form_group">
+                    <div class="form-group">
                         <label class="main-text" asp-for="RecipientСardNumber"> Card Number</label>
                         <input class="form_input" placeholder=" " type="text" asp-for="RecipientСardNumber"/>
                     </div>
-                    <div class="form_group">
+                    <div class="form-group">
                         <label class="main-text" asp-for="Amount">Amount</label>
                         <input class="form_input amount" placeholder="0" type="number" asp-for="Amount" />
                         $
@@ -26,7 +26,7 @@
                    
                     <dl></dl>
 
-                    <div class="error_container_registration text-danger" asp-validation-summary="All"></div>
+                    <div class="text-danger" asp-validation-summary="All"></div>
                     <div class="submit">
                         <input type="submit" value="Enter" id="form_button" />
                     </div>                    
