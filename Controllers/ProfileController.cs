@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using BankApplication.Infrastructure.ImageService;
+using BankApplication.Infrastructure.ProfileService;
 using Microsoft.AspNetCore.Authorization;
 
 namespace BankApplication.Controllers;
@@ -7,38 +8,23 @@ namespace BankApplication.Controllers;
 [Authorize]
 public class ProfileController : Controller
 {
-    private readonly IProfileRepository _profileRepository;    
-    private readonly ICardRepository _cardRepository;
-    private readonly IWebHostEnvironment _appEnvironment;
-    private readonly IFileUploadService _fileUploadService;
+    private readonly IProfileService _profileService;
 
-    public ProfileController(IProfileRepository profileRepository, ICardRepository cardRepository, 
-        IWebHostEnvironment appEnvironment, IFileUploadService fileUploadService)
+    public ProfileController(IProfileService profileService)
     {
-        _cardRepository = cardRepository;      
-        _profileRepository = profileRepository;
-        _appEnvironment = appEnvironment;
-        _fileUploadService = fileUploadService;
+        _profileService = profileService;
     }
-        
     public async Task<IActionResult> Index()
     {
         var userId = int.Parse(User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value);
-        var profile = await _profileRepository.GetProfileByUserIdAsync(userId);
-        profile.Cards = await _cardRepository.GetAllCardsByProfileIdAsync(profile.Id);       
-        profile.AvatarModel ??= new AvatarModel() {Name = "placeholder", Path = "/img/placeholder.png"};
-
-        var profileViewModel = new ProfileViewModel() { Profile = profile};
-        return View(profileViewModel);
+        return View(await _profileService.GetProfile(userId));
     }
  
     [HttpPost]
-    public async Task<IActionResult> EditProfile(ProfileViewModel profileModel)
+    public async Task<IActionResult> EditProfile(ProfileViewModel viewModel)
     {
-        var avatarFile = await _fileUploadService.LoadFile(profileModel.PhotoProfile, _appEnvironment);
         var userId = int.Parse(User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value);
-        await _profileRepository.EditProfileAsync(userId, profileModel, avatarFile);
-                
+        await _profileService.EditProfile(viewModel, userId);
         return RedirectToAction("Index");
     }
 }

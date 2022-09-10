@@ -24,7 +24,7 @@ public class AuthController : Controller
     {
         if (!ModelState.IsValid) return View(viewModel);
         var authDto = await _userControlService.Login(viewModel);
-        if (authDto.Status == false) return View();
+        if (authDto.Status == false) return View(); // ошибка
         
         Authorize(authDto.Token);
         return RedirectToAction("Index", "Home");
@@ -40,7 +40,7 @@ public class AuthController : Controller
     {
         if (!ModelState.IsValid) return View();
         var authDto = await _userControlService.Registration(viewModel);
-        if (authDto.Status == false) return View();
+        if (authDto.Status == false) return View(); // ошибка
         
         return RedirectToAction("VerifyEmailToken");
     }
