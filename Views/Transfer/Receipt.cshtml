@@ -1,0 +1,33 @@
+﻿@model Operation
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-4" style="border: 1px solid white; padding: 20px; border-radius: 20px;">
+            <div class="offset-2">
+                <img src="/img/transfer operation.png" width="250" style="border-radius: 20px;" />
+
+                <div class="row mt-4">
+                    <div class="col-4">
+                        <b class="card-item-text">Number</b>
+                        <p>@Model.Id</p>
+
+                    </div>
+                    @{
+                        if (Model.CardOperationType == CardOperationType.Transfer) ViewData["amount"] = "-";
+                        if (Model.CardOperationType == CardOperationType.Replenish) ViewData["amount"] = "+";
+                    }
+                    <div class="col-4">
+                        <b class="card-item-text">Amount</b>
+                        <p>@ViewData["amount"]@Model.Amount$</p>                        
+                    </div>
+                    <div class="col-4">
+                        <b class="card-item-text">Operation</b>
+                        <p>@Model.CardOperationType</p>
+                        <a class="main-btn btn-card" asp-action="Index" asp-controller="Profile">Back &emsp;</a>
+                    </div>                                       
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>
+

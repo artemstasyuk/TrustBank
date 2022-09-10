@@ -1,0 +1,87 @@
+﻿@using System.Security.Claims
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BankApplication</title>
+    <link rel="stylesheet" type="text/css" href="~/lib/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/style.css" />
+    <!--Validation style-->
+    <style>
+        .input-validation-error {
+            border-color: red;
+            background-color: #24262D;            
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1">
+                    <h3 class="nav-logo">Trust</h3>
+                </div>
+                <div class="col-md-3 offset-md-4">
+                    <nav>
+                        <a class="nav-item" asp-controller="Home" asp-action="Index">Home</a>
+                        <a class="nav-item" asp-controller="Cards" asp-action="Index">Cards</a>
+                        <a class="nav-item" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
+                    </nav>
+                </div>
+                <div class="col-md-3 offset-md-1">                    
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <div style="padding-left: 130px;">
+                            <img class="user" src="/img/user.png" alt="user">
+                            <a class="nav-button" style="cursor:pointer;" asp-controller="Auth" asp-action="Login">Log In</a>
+                       </div>
+                    }
+                    else
+                    {
+                        var jwtName = Context.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name);
+                        var jwtSurname = Context.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Surname);
+                        var login = $"{jwtName.Value} {jwtSurname.Value}";
+
+                        <div style="padding-left: 40px;">
+                            <img class="user" src="/img/user.png" alt="user">
+                            <div class="dropdown" style="display: inline;">
+                                <a class="nav-button dropdown-toggle" style="cursor:pointer;" data-bs-toggle="dropdown" aria-expanded="false">
+                                    @login
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="dropdown-item" asp-controller="Profile" asp-action="Index">My profile</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Auth" asp-action="Logout">Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    @RenderBody()
+          
+    <script>
+        function show_hide_password(target) {
+            var input = document.getElementById('password-input');
+            if (input.getAttribute('type') == 'password') {
+                target.classList.add('view');
+                input.setAttribute('type', 'text');
+            } else {
+                target.classList.remove('view');
+                input.setAttribute('type', 'password');
+            }
+            return false;
+        }
+    </script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js"></script>
+</body>
+</html>

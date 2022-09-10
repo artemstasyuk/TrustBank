@@ -1,0 +1,70 @@
+﻿@model CheckoutViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-1 offset-md-1">
+            <img class="ellipse-1" src="/img/ellipse1.png" alt="ellipse">
+        </div>
+
+        <div class="col-md-6 offset-md-1">
+            <div id="container">
+               <br />
+               <h1>&bull; Order your card &bull;</h1>
+               <br />
+               <div class="underline">
+               </div>
+                <div class="icon_wrapper text-center">
+                    <img src="/img/icon-courier.png">
+                </div>
+                <form asp-action="Checkout" method="post" id="contact_form">
+                    <div class="name">
+                        <label for="name"></label>
+                        <input type="text" placeholder="My name is" asp-for="Name" id="name_input">
+                    </div>
+                    <div class="surname">
+                        <label for="name"> </label>
+                        <input type="text" placeholder="My surname is" asp-for="Surname" id="name_input">
+                    </div>
+                    <div class="email">
+                        <label for="name"></label>
+                        <input type="text" placeholder="My email" asp-for="Email"  id="email_input">
+                    </div>
+                    @*<div class="subject"> 
+                        <label for="subject"></label>
+                        <select placeholder="My currency is" name="subject" id="subject_input" required>
+                            <option disabled hidden selected>SELECT YOUR CURRENCY</option>
+                            <option>DOLLAR</option>
+                            <option>EURO</option>
+                            <option>RUBLE</option>
+                        </select>
+                    </div>*@
+                    <div class="adress">
+                        <label for="adress"></label>
+                        <input type="text" placeholder="My adress" asp-for="@Model.Adress" id="name_input">
+                    </div>
+                    
+                    <div class="text-danger" asp-validation-summary="All"></div>
+                    
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <div class="submit">
+                             <a asp-action="Login" asp-controller="Auth" id="form_button">Checkout</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="submit">
+                            <input type="submit" value="Checkout" id="form_button"/>
+                        </div>
+                    }
+                </form><!-- // End form -->
+            </div><!-- // End #container -->
+        </div>
+
+        <div class="col-md-1 offset-md-1">
+            <img class="ellipse-2" src="/img/ellipse2.png" alt="ellipse">
+        </div>
+    </div>
+</div>
+
+    

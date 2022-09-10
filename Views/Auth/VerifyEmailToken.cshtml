@@ -1,0 +1,36 @@
+﻿@model EmailViewModel
+<div class="container">
+    <div class="row">
+        <div class="col-md-1 offset-md-1">
+            <img class="ellipse-1" src="/img/ellipse1.png" alt="ellipse">
+        </div>
+        <div class="col-md-6 offset-md-1">
+            <div id="container">
+                <br/>
+                <h3 class="text-center">&bull; Verify Your Email &bull;</h3>
+                <div class="text-center"><img src="/img/icon-confirmation.png" width="40" /></div>
+                <br/>
+                <div class="underline">
+                </div>
+                <form class="form" asp-action="VerifyEmailToken" asp-anti-forgery="true">
+                   
+                    <div class="form-group">
+                        <label class="login_label" asp-for="EmailCode">Enter the code</label><br/>
+                        <input class="form_input" asp-for="EmailCode"/>
+                        <span class="input-validation-error" asp-validation-for="EmailCode"/>
+                    </div>      
+                    <dl></dl>
+                            
+                      <div class="text-danger" asp-validation-summary="All"></div>
+                    <div class="submit">
+                       <input type="submit" value="ENTER" id="form_button" />
+                    </div>
+                    
+                </form><!-- // End form -->
+            </div><!-- // End #container -->
+        </div>
+        <div class="col-md-1 offset-md-1">
+            <img class="ellipse-2" src="/img/ellipse2.png" alt="ellipse">
+        </div>
+    </div>
+</div>
