@@ -1,15 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using BankApplication.Models.Enums;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-
 namespace BankApplication.Models;
-
-public enum ProfileStatus
-{
-    Active,
-    Deleted,
-    Returned
-}
 
 public class Profile
 {

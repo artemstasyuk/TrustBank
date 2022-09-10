@@ -22,29 +22,50 @@
     <div class="card-list mt-5">
         @foreach (var item in Model)
         {
-            <div class="card-item">
-                <a class="card-item-type"><img width="25" class="me-2" src="/img/shopping-cart.png" /><b>Debit</b></a>
+            @switch(item.Type)
+            {
+                case CardType.Debit :
+                {
+                    ViewBag.Image = "/img/shopping-cart.png";
+                        break;
+                }
+                case CardType.Credit :
+                {
+                    ViewBag.Image = "/img/bank.png";
+                    ViewBag.Color = "#65C3D0";
+                        break;
+                }
+                case CardType.Special:
+                {
+                    ViewBag.Image = "/img/special.png";
+                    ViewBag.Color = "#FFB9DF";
+                        break;
+                }
+            }
+                        
+            <div class="card-item">               
+                <a class="card-item-type"><img width="25" class="me-2" src="@ViewBag.Image" /><b>@item.Type</b></a>
                 <div class="row mt-5">
                     <div class="col-6">
-                        <h4 class="card-item-name">@item.Name <i>Trust Bank</i></h4>
-                        <p>The right debit card that makes money. Withdraw cash from all ATMs and earn cash points</p>
+                        <h4 style="color: @ViewBag.Color;" class="card-item-name">@item.Name <i>Trust Bank</i></h4>
+                        <p>@item.Info</p>
                         <div class="row mt-4">
                             <div class="col-3">
-                                <b class="card-item-text">@item.Features[0].Title</b>
+                                <b style="color: @ViewBag.Color;" class="card-item-text">@item.Features[0].Title</b>
                                 <p>@item.Features[0].Info</p>
                             </div>
                             <div class="col-3 offset-1">
-                                <b class="card-item-text">@item.Features[1].Title</b>
+                                <b style="color: @ViewBag.Color;" class="card-item-text">@item.Features[1].Title</b>
                                 <p>@item.Features[1].Info</p>
                             </div>
                             <div class="col-3 offset-1">
-                                <b class="card-item-text">@item.Features[2].Title</b>
+                                <b style="color: @ViewBag.Color;" class="card-item-text">@item.Features[2].Title</b>
                                 <p>@item.Features[2].Info</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-3 offset-2">
-                        <img width=330 src="/img/bank-card.png" />
+                        <img width=330 src=@item.ImageUrl />
                     </div>
                 </div>
                 <!-- Modal -->
@@ -67,11 +88,18 @@
                         </div>
                     </div>
                 </div>
-                <a class="main-btn btn-start me-1" asp-action="Checkout">Checkout</a>
+
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <a class="main-btn btn-start me-1" asp-action="Login" asp-controller="Auth">Checkout</a>
+                }
+                else
+                {
+                    <a class="main-btn btn-start me-1" asp-action="Checkout">Checkout</a>
+                }                              
                 <button class="main-btn btn-watch" id="myBtn">More</button>
             </div>
-        }
-        
+        }        
     </div>
 
 </div>

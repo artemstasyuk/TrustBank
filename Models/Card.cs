@@ -1,16 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿using BankApplication.Models.Enums;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BankApplication.Models;
-
-public enum CardStatus
-{
-    Active,
-    Deleted,
-    Returned,
-    Blocked
-}
 
 public class Card
 {
@@ -35,6 +28,8 @@ public class Card
 
     [BindNever]
     public CardStatus CardStatus { get; set; }
+    
+    public CardType CardType { get; set; }
        
     //not into db
     public Profile Profile { get; set; }

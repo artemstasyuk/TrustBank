@@ -1,4 +1,6 @@
-﻿namespace BankApplication.Infrastructure.TransferService;
+﻿using BankApplication.Models.Enums;
+
+namespace BankApplication.Infrastructure.TransferService;
 
 public interface ITransferService
 {

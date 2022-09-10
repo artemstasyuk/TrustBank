@@ -1,18 +1,14 @@
-﻿namespace BankApplication.Models
-{
-    public enum CardType
-    {
-        None,
-        Debit,
-        Credit,
-        Special
-    }
-    
+﻿using BankApplication.Models.Enums;
+
+namespace BankApplication.Models
+{       
     public class CardSample
     {
         public int Id { get; set; }
         public CardType Type { get; set; }
         public string Name { get; set; }
+        public string Info { get; set; }
+        public string ImageUrl { get; set; }
         public List<Feature> Features { get; set; }
     }
 

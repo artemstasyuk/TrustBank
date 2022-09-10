@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using BankApplication.Models.Enums;
+using System.Text;
 
 namespace BankApplication.Data.Repositories;
 

@@ -1,4 +1,5 @@
 ﻿using BankApplication.Infrastructure.TransferService;
+using BankApplication.Models.Enums;
 using Microsoft.AspNetCore.Authorization;
 
 namespace BankApplication.Controllers;

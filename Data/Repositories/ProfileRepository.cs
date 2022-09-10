@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using BankApplication.Models.Enums;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace BankApplication.Data.Repositories;

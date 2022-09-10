@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using BankApplication.Models.Enums;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace BankApplication.Infrastructure.TransferService;
 

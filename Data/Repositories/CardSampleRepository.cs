@@ -1,4 +1,6 @@
-﻿namespace BankApplication.Data.Repositories
+﻿using BankApplication.Models.Enums;
+
+namespace BankApplication.Data.Repositories
 {
     public class CardSampleRepository : ICardSampleRepository
     {
