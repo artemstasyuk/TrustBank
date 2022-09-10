@@ -13,18 +13,18 @@
                 <div class="underline">
                 </div>
                 <form class="form" asp-action="Login" asp-anti-forgery="true">
-                    <div class="form_group">
+                    <div class="form-group">
                         <label class="main-text" asp-for="Email">Email</label>
                         <input class="form_input" type="email" asp-for="Email"/>
                         <span class="input-validation-error" asp-validation-for="Email" />
                     </div>
            
-                    <div class="form_group">
+                    <div class="form-group">
                         <label class="main-text" asp-for="Password">Password</label><br />
-                        <input type="password" class="form_input password_input" asp-for="Password" />
+                        <input type="password" class="form_input password_input" asp-for="Password"/>
                         <span class="input-validation-error" asp-validation-for="Password" />
-                    </div>
-                                           
+                    </div>                                           
+                    
                     <div class="text-danger" asp-validation-summary="All"></div>
                     <div class="submit">
                         <input type="submit" value="LOGIN" id="form_button" />

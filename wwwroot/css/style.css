@@ -271,7 +271,7 @@ h1 {
 	width: 100%;
 }
 
-input[type='text'], [type='email'], [type='date'], [type='password'], select, textarea {
+input[type='hidden'], [type='text'], [type='email'], [type='date'], [type='password'], select, textarea {
     background: none;
     border: none;
     border-bottom: solid 2px #FDCF49;
@@ -280,7 +280,7 @@ input[type='text'], [type='email'], [type='date'], [type='password'], select, te
     font-weight: 400;
     letter-spacing: 1px;
     margin: 0em 0 1.875em 0;
-    padding: 0 0 0.875em 0;    
+    padding: 0 0 0.875em 0;
     width: 100%;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;

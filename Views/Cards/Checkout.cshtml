@@ -19,15 +19,15 @@
                 <form asp-action="Checkout" method="post" id="contact_form">
                     <div class="name">
                         <label for="name"></label>
-                        <input type="text" placeholder="My name is" asp-for="Name" id="name_input" required>
+                        <input type="text" placeholder="My name is" asp-for="Name" id="name_input">
                     </div>
                     <div class="surname">
                         <label for="name"> </label>
-                        <input type="text" placeholder="My surname is" asp-for="Surname" id="name_input" required>
+                        <input type="text" placeholder="My surname is" asp-for="Surname" id="name_input">
                     </div>
                     <div class="email">
                         <label for="name"></label>
-                        <input type="text" placeholder="My email" asp-for="Email"  id="email_input" required>
+                        <input type="text" placeholder="My email" asp-for="Email"  id="email_input">
                     </div>
                     @*<div class="subject">
                         <label for="subject"></label>
@@ -40,8 +40,10 @@
                     </div>*@
                     <div class="adress">
                         <label for="adress"></label>
-                        <input type="text" placeholder="My adress" asp-for="@Model.Adress" id="name_input" required>
+                        <input type="text" placeholder="My adress" asp-for="@Model.Adress" id="name_input">
                     </div>
+                    
+                    <div class="text-danger" asp-validation-summary="All"></div>
                     
                     @if (!User.Identity.IsAuthenticated)
                     {
