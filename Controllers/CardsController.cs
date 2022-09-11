@@ -32,12 +32,12 @@ namespace BankApplication.Controllers
         public IActionResult Checkout() =>  View();
 
         [HttpPost]
-        public async Task<IActionResult> Checkout(CheckoutViewModel viewModel)
+        public async Task<IActionResult> Checkout(int id,CheckoutViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
                 var userId = int.Parse(User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value);
-                await _cardService.Checkout(userId, viewModel);
+                await _cardService.Checkout(id, userId, viewModel);
                 
                 
                 return RedirectToAction("Index", "Profile");

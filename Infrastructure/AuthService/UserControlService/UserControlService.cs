@@ -63,7 +63,7 @@ public class UserControlService : IUserControlService
 
             await _profileRepository.CreateProfile(user);
 
-            var emailTokenDto = _emailService.SendEmailCode(viewModel.Email, $"This is your code {GenerateEmailCode()}", "Verify your email"); 
+            var emailTokenDto = _emailService.SendEmailCode(viewModel.Email, GenerateEmailCode(), "Verify your email"); 
         
             _emailToken.SetEmailToken(emailTokenDto);
 

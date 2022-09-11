@@ -13,6 +13,9 @@ namespace BankApplication.Data.Repositories
         
         public async Task<List<CardSample>> GetAll() =>
             await _db.CardSamples.Include(s => s.Features).ToListAsync();
+
+        public async Task<CardSample> GetCardByIdAsync(int id) =>
+            await _db.CardSamples.FindAsync(new object[] {id});
        
         public async Task<List<CardSample>> GetCardsByType(string type)
         {

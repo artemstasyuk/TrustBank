@@ -2,5 +2,5 @@
 
 public interface ICardService
 {
-    Task Checkout(int userId, CheckoutViewModel viewModel);
+    Task Checkout(int cardSampleId, int userId, CheckoutViewModel viewModel);
 }

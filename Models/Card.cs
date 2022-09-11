@@ -13,6 +13,7 @@ public class Card
     [ForeignKey("Profile")]
     public int ProfileId { get; set; }
     
+    public CardType Type { get; set; }
     public string CardNumber { get; set; }
     
     public string CVV { get; set; }

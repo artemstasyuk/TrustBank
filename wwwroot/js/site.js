@@ -4,11 +4,16 @@ var modal = document.getElementById("myModal");
 // Получить кнопку, которая открывает модальный
 var btn = document.getElementById("myBtn");
 
+var avatar_btn = document.getElementById("avatarBtn");
+
 // Получить элемент <span>, который закрывает модальный
 var span = document.getElementsByClassName("close")[0];
 
 // Когда пользователь нажимает на кнопку, откройте модальный
 btn.onclick = function () {
+    modal.style.display = "block";
+}
+avatar_btn.onclick = function () {
     modal.style.display = "block";
 }
 

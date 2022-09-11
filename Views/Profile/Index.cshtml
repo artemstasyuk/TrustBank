@@ -45,7 +45,7 @@
     <div class="profile mt-5">
         <div class="row">
             <div class="col-md-2">
-                <img class="profile-avatar" src="@Model.Profile.AvatarModel.Path" />
+                <img class="profile-avatar" id="avatarBtn" src="@Model.Profile.AvatarModel.Path" />
                 <a class="edit-btn" id="myBtn"><img src="/img/edit-icon.png" width="30" /></a>  
             </div>
                                     
@@ -83,11 +83,33 @@
         {
             foreach (var item in Model.Profile.Cards)
             {
+                @switch(item.Type)
+                {
+                    case CardType.Debit :
+                    {
+                        ViewBag.Image = "/img/shopping-cart.png";
+                        ViewBag.CardImage = "/img/bank-card.png";
+                        break;
+                    }
+                    case CardType.Credit :
+                    {
+                        ViewBag.Image = "/img/bank.png";
+                        ViewBag.CardImage = "/img/credit-card.png";
+                        break;
+                    }
+                    case CardType.Special:
+                    {
+                        ViewBag.Image = "/img/special.png";
+                        ViewBag.CardImage = "/img/special-card.png";
+                        break;
+                    }
+                }
+                
                 <div class="card-item">
-                    <a class="card-item-type"><img width="25" class="me-2" src="/img/shopping-cart.png" /><b>Debit</b></a>
+                    <a class="card-item-type"><img width="25" class="me-2" src="@ViewBag.Image" /><b>@item.Type</b></a>
                     <div class="row mt-3">
                         <div class="col-4">
-                            <img width=330 src="/img/bank-card.png"/>                            
+                            <img width=330 src="@ViewBag.CardImage"/>                            
                         </div>
                         <div class="col-5">
                             <h4>Your balance: $@item.Balance</h4>
@@ -107,7 +129,6 @@
         }
         else
         {
-            <img src="~/img/question.png" />
             <a class="nav-item" asp-controller="Cards" asp-action="Index"> You haven't got a card yet ?</a>
         }
     </div>
