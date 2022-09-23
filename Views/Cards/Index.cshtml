@@ -1,7 +1,7 @@
 ﻿@model List<CardSample>
 
 <div class="container">
-    
+
     <div class="cards-title text-center mt-5">
         <h1 class="cards-header">Bank Cards</h1>
         <p class="cards-header-text mt-4">
@@ -9,7 +9,7 @@
             Choose a profitable card with a set of services that suits you
         </p>
     </div>
-    
+
     <div class="card-nav text-center">
         <div class="card-nav-items col-4 offset-4">
             <a class="card-nav-item active" asp-controller="Cards" asp-action="Index">All Cards</a>
@@ -22,28 +22,28 @@
     <div class="card-list mt-5">
         @foreach (var item in Model)
         {
-            @switch(item.Type)
+            @switch (item.Type)
             {
-                case CardType.Debit :
-                {
-                    ViewBag.Image = "/img/shopping-cart.png";
+                case CardType.Debit:
+                    {
+                        ViewBag.Image = "/img/shopping-cart.png";
                         break;
-                }
-                case CardType.Credit :
-                {
-                    ViewBag.Image = "/img/bank.png";
-                    ViewBag.Color = "#65C3D0";
+                    }
+                case CardType.Credit:
+                    {
+                        ViewBag.Image = "/img/bank.png";
+                        ViewBag.Color = "#65C3D0";
                         break;
-                }
+                    }
                 case CardType.Special:
-                {
-                    ViewBag.Image = "/img/special.png";
-                    ViewBag.Color = "#FFB9DF";
+                    {
+                        ViewBag.Image = "/img/special.png";
+                        ViewBag.Color = "#FFB9DF";
                         break;
-                }
+                    }
             }
-                        
-            <div class="card-item">               
+
+            <div class="card-item">
                 <a class="card-item-type"><img width="25" class="me-2" src="@ViewBag.Image" /><b>@item.Type</b></a>
                 <div class="row mt-5">
                     <div class="col-6">
@@ -68,26 +68,6 @@
                         <img width=330 src=@item.ImageUrl />
                     </div>
                 </div>
-                <!-- Modal -->
-                <div id="myModal" class="modal">
-                    <!-- Modal content -->
-                    <div class="modal-content">
-                        <div class="row">
-                            <div class="col-1 offset-11">
-                                <button class="btn btn-close btn-danger close"></button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-10 offset-1">
-                                <img class="modal-image-pattern" src="/img/card-template.png" width="120" />
-                                <h6 class="modal-info"><i>1.</i> Free maintenance</h6>
-                                <h6 class="modal-info"><i>2.</i> Free deposits and transfers</h6>
-                                <h6 class="modal-info"><i>3.</i> Withdrawal without commission</h6>
-                                <p class="modal-info-actions mt-4">Top up | Transfer | Store | Withdraw | Pay</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 @if (!User.Identity.IsAuthenticated)
                 {
@@ -96,10 +76,33 @@
                 else
                 {
                     <a class="main-btn btn-start me-1" asp-action="Checkout" asp-route-id="@item.Id">Checkout</a>
-                }                              
-                <button class="main-btn btn-watch" id="myBtn">More</button>
+                }
+                <!-- Button trigger modal -->
+                <button class="btn main-btn btn-watch" data-bs-toggle="modal" data-bs-target="#modal">
+                    More
+                </button>
             </div>
-        }        
+        }
     </div>
-
 </div>
+
+
+<!-- Modal -->
+<div class="modal" id="modal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div style="background-color:#24262D" class="modal-content">
+            <div class="modal-header">
+                <h3 style="color:#FDCF49;">Advantages</h3>
+                <button class="btn-close btn-close-white" data-bs-dismiss="modal" aria-bs-label="close"></button>
+            </div>
+            <div class="modal-body">
+                <img class="modal-image-pattern" src="/img/card-template.png" width="120" />
+                <h6 class="modal-info"><i>1.</i> Free maintenance</h6>
+                <h6 class="modal-info"><i>2.</i> Free deposits and transfers</h6>
+                <h6 class="modal-info"><i>3.</i> Withdrawal without commission</h6>
+                <p class="modal-info-actions mt-4">Top up | Transfer | Store | Withdraw | Pay</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal end-->

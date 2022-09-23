@@ -110,7 +110,7 @@ main {
     padding: 12px 38px;
     border: none;
     border-radius: 3px;
-    margin-top: 15px;
+    
     margin-right: 10px;
     transition: all 500ms ease;
     position: relative;
@@ -467,12 +467,12 @@ label{
 }
 
 .modal-info {
-    color: #54595E;
+    color: white;
 }
 
 .modal-info-actions {
     font-family: 'Montserrat', Arial, sans-serif;
-    color: #808080;
+    color: #ddd;
 } 
 
 .close {
@@ -610,4 +610,9 @@ label{
     position: relative;
     font-size: 20px;
     right: 60px;
+}
+
+
+.modal-backdrop {
+    z-index: -1;
 }
